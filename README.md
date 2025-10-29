@@ -8,9 +8,10 @@ Developed by [kathrinmzl](https://www.github.com/kathrinmzl)
 ![GitHub top language](https://img.shields.io/github/languages/top/kathrinmzl/LoanGuard?color=green)
 [![badge](https://img.shields.io/badge/deployment-Heroku-purple)]( TODO LINK!!)
 
-Loan Guard short Description
+In the banking sector, effective credit risk assessment is critical to maintaining financial stability and minimizing losses. Loan defaults can lead to significant financial setbacks and reduced liquidity for lending institutions. The LoanGuard project aims to help financial institutions better understand what drives default risk and proactively identify customers who are likely to default on their loans.
 
-The platform was created for educational purposes only.
+
+The project was created for educational purposes only.
 
 [Live page on Heroku]( TODO LINK!!)
 
@@ -21,7 +22,7 @@ Source: [amiresponsive](https://ui.dev/amiresponsive?url=  TODO LINK!!) ???
 
 ## Dataset Content
 
-This dataset is publicly available on [Kaggle](https://www.kaggle.com/datasets/nikhil1e9/loan-default) and contains information about individual borrowers and their loan characteristics. Each row represents a unique loan record, including both personal and financial attributes that may influence the likelihood of default. The dataset provides a comprehensive overview of borrower profiles, such as age, income, credit score, employment details, and marital status, as well as loan-specific features like loan amount, interest rate, loan term, and purpose.  
+The used dataset is publicly available on [Kaggle](https://www.kaggle.com/datasets/nikhil1e9/loan-default) and contains information about individual borrowers and their loan characteristics. Each row represents a unique loan record, including both personal and financial attributes that may influence the likelihood of default. The dataset provides a comprehensive overview of borrower profiles, such as age, income, credit score, employment details, and marital status, as well as loan-specific features like loan amount, interest rate, loan term, and purpose.  
 
 In total, the dataset includes **255,347 records and 18 variables**. The target variable, **`Default`**, indicates whether a borrower has defaulted on their loan (`1`) or successfully repaid it (`0`). This data allows for predictive modeling to identify patterns and risk factors associated with loan defaults.  
 
@@ -46,12 +47,55 @@ In total, the dataset includes **255,347 records and 18 variables**. The target 
 | HasCoSigner      | Has a co-signer                 | Feature     | object    | Yes, No                |
 | Default          | Loan default flag               | Target      | int       | 0 = No default, 1 = Default |
 
+## Project Terms & Jargon TODO
+	- A customer is a person who consumes your service or product.
+	- A prospect is a potential customer.
+	- A churned customer is a user who has stopped using your product or service.
+	- This customer has a tenure level, which is the number of months this person has used our product/service.
+
 ## Business Requirements
-* Describe your business requirements
+From a business perspective, this project supports the strategic goals of a financial institution such as:
+
+- Improving risk management by identifying high-risk applicants early.
+
+ - Enhancing profitability through optimized loan approval decisions.
+
+- Increasing customer trust and operational efficiency by offering fair, data-driven credit evaluations.
+
+ - Enabling personalized loan offerings and proactive interventions for at-risk customers (e.g., adjusted payment plans or counseling).
+
+Ultimately, this project aligns predictive analytics with the bank’s long-term objective of balancing growth with financial stability.
+
+To achieve the outlined objectives, the project will focus on the following key requirements.
+
+**Business Requirement 1: Data Insights (Conventional Analysis)**
+- Identify key customer and loan attributes that are most correlated with loan default.
+Provide visual and statistical insights to help business analysts understand the primary drivers of credit risk.
+
+**Business Requirement 2: Predictive Model (Machine Learning)**
+- Develop a machine learning model capable of predicting whether a loan applicant is likely to default. The system should output a probability of default to support the credit team in decision-making.
+
+**Business Requirement 3: Clustering Model (Machine Learning)** - Optional
+- Group borrowers into risk-based clusters to segment customers by credit behavior and improve tailored intervention strategies.
+
+Additional Considerations: TODO -Adjust/take out?
+
+- Predictions should be explainable, highlighting which factors most influence a customer’s default risk. (OPTIONAL: SHAP/LIME)
+
+- Ethical and fairness considerations must be taken into account to avoid bias against demographic groups. (OPTIONAL: Check later what could done here)
+
+- The final output will be presented in an interactive dashboard that allows real-time testing of new loan applications.
 
 
-## Hypothesis and how to validate?
-* List here your project hypothesis(es) and how you envision validating it (them) 
+## Hypotheses and how to validate them?
+To better understand the factors influencing loan default risk, we formulated four key hypotheses based on domain knowledge and the available data. Each hypothesis focuses on a variable expected to impact default probability.
+
+| Hypothesis | Rationale | Validation |
+|------------|-----------|----------------|
+| H1: Higher LoanAmount is associated with higher default risk | Borrowers taking larger loans may struggle more to repay | Visualize distribution of LoanAmount by Default, conduct statistical test to confirm difference, correlation analysis |
+| H2: Lower CreditScore is associated with higher default risk | Credit score reflects repayment history and creditworthiness | Visualize distribution of CreditScore by Default, conduct statistical test to confirm difference, correlation analysis |
+| H3: Shorter MonthsEmployed is associated with higher default risk | Less stable employment may indicate lower income stability | Visualize distribution of MonthsEmployed by Default, conduct statistical test to confirm difference, correlation analysis |
+| H4: Higher DTIRatio is associated with higher default likelihood | High debt relative to income may indicate repayment difficulty | Visualize distribution of DTIRatio by Default, conduct statistical test to confirm difference, correlation analysis |
 
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
