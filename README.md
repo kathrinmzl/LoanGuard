@@ -1,48 +1,50 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Loan Guard
 
-## Template Instructions
+Developed by [kathrinmzl](https://www.github.com/kathrinmzl)
 
-Welcome,
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/kathrinmzl/LoanGuard)](https://www.github.com/kathrinmzl/LoanGuard/commits/main)
+![GitHub last commit](https://img.shields.io/github/last-commit/kathrinmzl/LoanGuard?color=red)
+![GitHub language count](https://img.shields.io/github/languages/count/kathrinmzl/LoanGuard?color=yellow)
+![GitHub top language](https://img.shields.io/github/languages/top/kathrinmzl/LoanGuard?color=green)
+[![badge](https://img.shields.io/badge/deployment-Heroku-purple)]( TODO LINK!!)
 
-This is the Code Institute student template for the bring your own data project option in Predictive Analytics. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+Loan Guard short Description
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+The platform was created for educational purposes only.
 
-## How to use this repo
+[Live page on Heroku]( TODO LINK!!)
 
-1. Use this template to create your GitHub project repo
+![Application Mockup](docs/mockup.png) ???
 
-1. In your newly created repo click on the green Code button. 
-
-1. Then, from the Codespaces tab, click Create codespace on main.
-
-1. Wait for the workspace to open. This can take a few minutes.
-
-1. Open a new terminal and `pip3 install -r requirements.txt`
-
-1. Open the jupyter_notebooks directory, and click on the notebook you want to open.
-
-1. Click the kernel button and choose Python Environments.
-
-Note that the kernel says Python 3.12.1 as it inherits from the workspace, so it will be Python-3.12.1 as installed by Codespaces. To confirm this, you can use `! python --version` in a notebook code cell.
-
-## Cloud IDE Reminders
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+Source: [amiresponsive](https://ui.dev/amiresponsive?url=  TODO LINK!!) ???
 
 
 ## Dataset Content
-* Describe your dataset. Choose a dataset of reasonable size to avoid exceeding the repository's maximum size and to have a shorter model training time. If you are doing an image recognition project, we suggest you consider using an image shape that is 100px × 100px or 50px × 50px, to ensure the model meets the performance requirement but is smaller than 100Mb for a smoother push to GitHub. A reasonably sized image set is ~5000 images, but you can choose ~10000 lines for numeric or textual data. 
 
+This dataset is publicly available on [Kaggle](https://www.kaggle.com/datasets/nikhil1e9/loan-default) and contains information about individual borrowers and their loan characteristics. Each row represents a unique loan record, including both personal and financial attributes that may influence the likelihood of default. The dataset provides a comprehensive overview of borrower profiles, such as age, income, credit score, employment details, and marital status, as well as loan-specific features like loan amount, interest rate, loan term, and purpose.  
+
+In total, the dataset includes **255,347 records and 18 variables**. The target variable, **`Default`**, indicates whether a borrower has defaulted on their loan (`1`) or successfully repaid it (`0`). This data allows for predictive modeling to identify patterns and risk factors associated with loan defaults.  
+
+| Variable          | Meaning                         | Column Type | Data Type | Units / Possible Values |
+|------------------|---------------------------------|-------------|-----------|------------------------|
+| LoanID           | Unique identifier for each loan | Identifier  | object    | Unique code per row    |
+| Age              | Age of the customer             | Feature     | int       | 18 - 69 Years          |
+| Income           | Annual income of the customer   | Feature     | float     | 15000.0 - 149999.0 USD |
+| LoanAmount       | Amount of the loan              | Feature     | float     | 5000.0 - 249999.0 USD |
+| CreditScore      | Credit score of the customer    | Feature     | float     | 300 - 849              |
+| MonthsEmployed   | Number of months employed       | Feature     | int       | 0 - 119 Months         |
+| NumCreditLines   | Number of open credit lines     | Feature     | int       | 1 - 4                  |
+| InterestRate     | Interest rate of the loan       | Feature     | float     | 2 - 25 %               |
+| LoanTerm         | Loan term in months             | Feature     | int       | 12 - 60 Months         |
+| DTIRatio         | Debt-to-income ratio            | Feature     | float     | 0.1 - 0.9 Ratio        |
+| Education        | Highest education level         | Feature     | object    | Bachelor's, Master's, High School, PhD |
+| EmploymentType   | Type of employment              | Feature     | object    | Full-time, Unemployed, Self-employed, Part-time |
+| MaritalStatus    | Marital status                  | Feature     | object    | Divorced, Married, Single |
+| HasMortgage      | Mortgage ownership              | Feature     | object    | Yes, No                |
+| HasDependents    | Has dependents                  | Feature     | object    | Yes, No                |
+| LoanPurpose      | Purpose of the loan             | Feature     | object    | Other, Auto, Business, Home, Education |
+| HasCoSigner      | Has a co-signer                 | Feature     | object    | Yes, No                |
+| Default          | Loan default flag               | Target      | int       | 0 = No default, 1 = Default |
 
 ## Business Requirements
 * Describe your business requirements
