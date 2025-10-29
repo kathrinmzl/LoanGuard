@@ -99,7 +99,22 @@ To better understand the factors influencing loan default risk, we formulated fo
 
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
-* List your business requirements and a rationale to map them to the Data Visualizations and ML tasks
+This section explains how each business requirement is addressed by specific analyses, visualizations and ML techniques. It ensures that insights and predictions directly support the business goals and can be interpreted by stakeholders.
+
+**Business Requirement 1: Data Insights (Conventional Analysis)**
+- Identify key customer and loan attributes that are most correlated with loan default.
+- Provide visual and statistical insights to help business analysts understand the primary drivers of credit risk.
+- Visualize distributions and relationships between key features and the target variable.
+
+**Business Requirement 2: Predictive Model (Machine Learning)**
+- Develop a **binary classification model** to predict whether a loan applicant is likely to default.
+- Additionally, show the **probability of default** to support the credit team in decision-making.
+- Evaluate model performance and feature importance for transparency and reliability.
+
+**Business Requirement 3: Clustering Model (Machine Learning) - Optional**
+- Group borrowers into risk-based clusters to segment customers by credit behavior and improve tailored intervention strategies.
+- Analyze and visualize cluster characteristics to understand risk profiles.
+- Visualize cluster assignments to facilitate understanding by stakeholders. (OPTIONAL)
 
 
 ## ML Business Case
