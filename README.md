@@ -162,9 +162,74 @@ This segmentation will help the credit and retention teams tailor communication,
 
 
 ## Dashboard Design
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
-* Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
 
+The dashboard will be developed in **Streamlit** and designed to guide the user from business understanding to actionable insights and model-based predictions.  
+It will consist of **five main pages**, each mapped to specific business requirements.
+
+The goal of the dashboard is to provide both **descriptive insights** and **predictive intelligence** to support data-driven decisions in **loan management and credit risk assessment**.  
+It will serve two main user groups:  
+- **Business analysts:** who need to explore patterns and trends in borrower data.  
+- **Credit officers:** who need actionable information on loan risk and applicant default probability.
+
+### **Page 1: Quick Project Summary**
+- **Purpose:** Provide an overview of the project and orient users.  
+- **Sections:**
+  - Quick project summary
+  - Project terms & definitions (e.g., “Default”, “DTI Ratio”, “Credit Score”)
+  - Dataset overview (number of records, key variables)
+  - Business requirements
+  - Navigation guide for subsequent pages
+
+### **Page 2: Data Exploration and Correlation Analysis**
+- **Purpose:** Address **Business Requirement 1 (Data Insights)**  
+- **Sections:**
+  - Checkbox: Data inspection (number of rows, columns, and first 10 rows)
+  - Correlation heatmap of numerical variables
+  - Visualization of main drivers of default (e.g., boxplots or histograms for Income, LoanAmount, CreditScore)
+  - Checkbox: Display pairplot or parallel coordinates plot for top correlated variables
+  - Correlation conclusions and considerations
+  - Optional: Display summary statistics and data distribution insights
+
+### **Page 3: Hypothesis Testing and Validation**
+- **Purpose:** Present hypotheses and their validation process.  
+- **Sections:**
+  - State each of the four project hypotheses.
+  - Checkbox: Display corresponding plot for each hypothesis (e.g., boxplot or histogram split by Default)
+  - Checkbox: Display test results (e.g., t-test or chi-square)
+  - Short written conclusions summarizing which hypotheses were validated
+  - Insights and next steps (how findings inform feature selection or model design)
+
+### **Page 4: Default Probability Prediction (User Input)**
+- **Purpose:** Address **Business Requirement 2 (Predictive Model)**  
+- **Sections:**
+  - State business requirement 2
+  - Widget input fields for customer data (Age, Income, LoanAmount, CreditScore, etc.)
+  - “Run Predictive Analysis” button that serves the input data to the trained ML pipeline
+  - Output:
+    - Predicted default status (Yes/No)
+    - Probability of default (e.g., 73%)
+    - Top 3 contributing factors (based on feature importance or SHAP)
+  - Optional: Explanation panel for model interpretation (if SHAP/LIME added later)
+
+### **Page 5: Classification Model Insights**
+- **Purpose:** Show model performance and interpretation.  
+- **Sections:**
+  - Model overview and ML pipeline steps
+  - Model evaluation metrics (Accuracy, Precision, Recall, F1, AUC)
+  - Confusion matrix, ROC curve, Precision–Recall curve
+  - Feature importance visualization
+  - Considerations and conclusions (model interpretability and limitations)
+
+### **Page 6: Borrower Clustering Insights (Optional)**
+- **Purpose:** Address **Business Requirement 3 (Clustering Model)**  
+- **Sections:**
+  - Model overview (unsupervised clustering rationale)
+  - Silhouette score and number of clusters chosen
+  - 2D visualization of clusters (using PCA/t-SNE)
+  - Cluster profile table (avg. Income, CreditScore, Default rate, LoanPurpose)
+  - Bar chart comparing clusters by default rate
+  - Cluster interpretation summary (e.g., “Cluster 2 — low income, high DTI, high default risk”)
+  - Considerations and conclusions (business use of segmentation)
 
 
 ## Unfixed Bugs
