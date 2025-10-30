@@ -118,7 +118,47 @@ This section explains how each business requirement is addressed by specific ana
 
 
 ## ML Business Case
-* In the previous bullet, you potentially visualized an ML task to answer a business requirement. You should frame the business case using the method we covered in the course 
+
+#### **Binary Classification Model — Loan Default Prediction**
+
+We aim to develop a **supervised** machine learning model that predicts whether a loan applicant  will default or not.  
+In addition to the binary outcome, the model will provide a **probability of default** to support the credit risk team in decision-making.
+
+- **Goal:** Predict if a borrower will default on their loan (`Default` variable) and provide the associated probability.  
+- **Model type:** Supervised — Binary Classification.  
+- **Input features:** All borrower demographic and financial attributes, excluding identifiers such as `LoanID`.  
+- **Model choice:** To be determined after experimentation. Candidate models include Logistic Regression, Random Forest, and Gradient Boosting (XGBoost, LightGBM).  
+- **Success metrics (on both training and test sets):**  
+  - Accuracy ≥ 0.80   (OPTIONAL)
+  - Recall ≥ 0.80 (to minimize false negatives — high-risk borrowers predicted as safe)  
+  - ROC-AUC ≥ 0.90   (OPTIONAL)
+- **Failure conditions:**  
+  - Model performs poorly on unseen (test) data → indicates overfitting.  
+  - Large imbalance between precision and recall → unreliable predictions.  
+- **Output definition:**  
+  - Binary prediction (0 = no default, 1 = default).  
+  - Probability of default (e.g., 0.76 = 76% chance of default) to guide credit risk decisions.  
+- **Heuristics:** Traditionally, financial institutions rely on fixed credit scores or manual reviews to assess loan risk.  
+
+#### **Clustering Model — Borrower Segmentation (Optional)**
+
+We plan to explore an **unsupervised** clustering model to group borrowers with similar credit and loan characteristics.  
+This segmentation will help the credit and retention teams tailor communication, product offerings, and risk mitigation strategies.
+
+- **Goal:** Identify distinct borrower segments based on credit behavior and financial characteristics.  
+- **Model type:** Unsupervised — Clustering.  
+- **Input features:** Selected normalized numerical and encoded categorical variables that reflect borrower behavior and financial profile.  
+- **Model choice:** To be determined after exploration (likely K-Means or Hierarchical Clustering).  
+- **Success metrics:**  
+  - Average silhouette score ≥ 0.45  
+  - Clusters should be interpretable and distinct in profile characteristics.  
+- **Failure conditions:**  
+  - Model suggests more than 15 clusters → difficult to interpret or apply in business context.  
+  - Clusters are not meaningfully distinct (overlapping feature distributions).  
+- **Output definition:**  
+  - Cluster assignments appended to the dataset as an additional categorical column (`ClusterID`).  
+  - Each borrower belongs to one cluster (e.g., 0, 1, 2, …).  
+- **Heuristics:** Currently, no formal segmentation process exists.
 
 
 ## Dashboard Design
