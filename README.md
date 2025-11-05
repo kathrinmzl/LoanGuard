@@ -22,36 +22,34 @@ Source: [amiresponsive](https://ui.dev/amiresponsive?url=  TODO LINK!!) ???
 
 ## Dataset Content
 
-The used dataset is publicly available on [Kaggle](https://www.kaggle.com/datasets/nikhil1e9/loan-default) and contains information about individual borrowers and their loan characteristics. Each row represents a unique loan record, including both personal and financial attributes that may influence the likelihood of default. The dataset provides a comprehensive overview of borrower profiles, such as age, income, credit score, employment details, and marital status, as well as loan-specific features like loan amount, interest rate, loan term, and purpose.  
+The used dataset is publicly available on [Kaggle](https://www.kaggle.com/datasets/laotse/credit-risk-dataset/data) and contains information about individual borrowers and their loan characteristics. Each row represents a loan record, including both personal and financial attributes that may influence the likelihood of default. The dataset provides a comprehensive overview of borrower profiles, such as age, income, home ownership or employment details, as well as loan-specific features like loan amount, interest rate and purpose.  
 
-In total, the dataset includes **255,347 records and 18 variables**. The target variable, **`Default`**, indicates whether a borrower has defaulted on their loan (`1`) or successfully repaid it (`0`). This data allows for predictive modeling to identify patterns and risk factors associated with loan defaults.  
+In total, the dataset includes **32,581 records and 12 variables**. The target variable, **`loan_status`**, indicates whether a borrower has defaulted on their loan (`1`) or successfully repaid it (`0`). The target distribution is **imbalanced toward non-default cases**, reflecting real-world lending scenarios where most borrowers do not default. This dataset enables predictive modeling to identify patterns and risk factors associated with loan default.
 
-| Variable          | Meaning                         | Column Type | Data Type | Units / Possible Values |
-|------------------|---------------------------------|-------------|-----------|------------------------|
-| LoanID           | Unique identifier for each loan | Identifier  | object    | Unique code per row    |
-| Age              | Age of the customer             | Feature     | int       | 18 - 69 Years          |
-| Income           | Annual income of the customer   | Feature     | float     | 15000.0 - 149999.0 USD |
-| LoanAmount       | Amount of the loan              | Feature     | float     | 5000.0 - 249999.0 USD |
-| CreditScore      | Credit score of the customer    | Feature     | float     | 300 - 849              |
-| MonthsEmployed   | Number of months employed       | Feature     | int       | 0 - 119 Months         |
-| NumCreditLines   | Number of open credit lines     | Feature     | int       | 1 - 4                  |
-| InterestRate     | Interest rate of the loan       | Feature     | float     | 2 - 25 %               |
-| LoanTerm         | Loan term in months             | Feature     | int       | 12 - 60 Months         |
-| DTIRatio         | Debt-to-income ratio            | Feature     | float     | 0.1 - 0.9 Ratio        |
-| Education        | Highest education level         | Feature     | object    | Bachelor's, Master's, High School, PhD |
-| EmploymentType   | Type of employment              | Feature     | object    | Full-time, Unemployed, Self-employed, Part-time |
-| MaritalStatus    | Marital status                  | Feature     | object    | Divorced, Married, Single |
-| HasMortgage      | Mortgage ownership              | Feature     | object    | Yes, No                |
-| HasDependents    | Has dependents                  | Feature     | object    | Yes, No                |
-| LoanPurpose      | Purpose of the loan             | Feature     | object    | Other, Auto, Business, Home, Education |
-| HasCoSigner      | Has a co-signer                 | Feature     | object    | Yes, No                |
-| Default          | Loan default flag               | Target      | int       | 0 = No default, 1 = Default |
+| Variable | Description | Role | Data Type | Units / Possible Values |
+|-----------|-------------|------|------------|--------------------------|
+| `person_age` | Age of the borrower | Feature | int64 | Years |
+| `person_income` | Annual income of the borrower | Feature | float64 | USD  |
+| `person_home_ownership` | Type of home ownership | Feature | object | RENT, OWN, MORTGAGE, OTHER |
+| `person_emp_length` | Length of employment | Feature | float64 | Years |
+| `loan_intent` | Purpose of the loan | Feature | object | PERSONAL, EDUCATION, MEDICAL, VENTURE, HOMEIMPROVEMENT, DEBTCONSOLIDATION |
+| `loan_grade` | Loan grade assigned by lender | Feature | object | A, B, C, D, E, F, G |
+| `loan_amnt` | Loan amount requested | Feature | float64 | USD |
+| `loan_int_rate` | Interest rate applied to the loan | Feature | float64 | Percentage |
+| `loan_percent_income` | Loan amount as a percentage of annual income | Feature | float64 | Ratio |
+| `cb_person_default_on_file` | Whether the person has previously defaulted | Feature | object | Y, N |
+| `cb_person_cred_hist_length` | Length of credit history | Feature | int64 | Years |
+| `loan_status` | Loan default flag (target variable) | Target | int64 | 0 = No Default, 1 = Default |
 
-## Project Terms & Jargon TODO
-	- A customer is a person who consumes your service or product.
-	- A prospect is a potential customer.
-	- A churned customer is a user who has stopped using your product or service.
-	- This customer has a tenure level, which is the number of months this person has used our product/service.
+
+## Project Terms & Jargon 
+- A **borrower** is a person who takes out a loan from a financial institution.  
+- A **lender** is the institution or company providing the loan to the borrower.  
+- A **loan** is an amount of money borrowed that is expected to be paid back with interest.  
+- A **default** occurs when a borrower fails to make scheduled loan payments or meet the agreed repayment terms.  
+- A **defaulted borrower** is a customer who has failed to repay their loan as agreed and is classified as being in default.  
+- A **non-default** refers to a borrower who repays their loan successfully or continues to make payments on time.  
+
 
 ## Business Requirements
 From a business perspective, this project supports the strategic goals of a financial institution such as:
@@ -91,12 +89,13 @@ Additional Considerations: TODO -Adjust/take out?
 To better understand the factors influencing loan default risk, we formulated four key hypotheses based on domain knowledge and the available data. Each hypothesis focuses on a variable expected to impact default probability.
 
 | Hypothesis | Rationale | Validation |
-|------------|-----------|----------------|
-| H1: Higher LoanAmount is associated with higher default risk | Borrowers taking larger loans may struggle more to repay | Visualize distribution of LoanAmount by Default, conduct statistical test to confirm difference, correlation analysis |
-| H2: Lower CreditScore is associated with higher default risk | Credit score reflects repayment history and creditworthiness | Visualize distribution of CreditScore by Default, conduct statistical test to confirm difference, correlation analysis |
-| H3: Shorter MonthsEmployed is associated with higher default risk | Less stable employment may indicate lower income stability | Visualize distribution of MonthsEmployed by Default, conduct statistical test to confirm difference, correlation analysis |
-| H4: Higher DTIRatio is associated with higher default likelihood | High debt relative to income may indicate repayment difficulty | Visualize distribution of DTIRatio by Default, conduct statistical test to confirm difference, correlation analysis |
+|------------|------------|-------------|
+| **H1:** Higher `loan_amnt` is associated with higher default risk | Borrowers taking larger loans may face greater repayment burdens, increasing the likelihood of default | Visualize distribution of `loan_amnt` by `loan_status`, conduct statistical test to confirm difference, correlation analysis, correlation analysis |
+| **H2:** Lower `person_income` is associated with higher default risk | Borrowers with lower income may have limited financial capacity to meet repayment obligations | Visualize distribution of `person_income` by `loan_status`, conduct statistical test to confirm difference, correlation analysis, correlation analysis |
+| **H3:** Lower `loan_grade` (credit quality) is associated with higher default risk | A lower loan grade reflects weaker creditworthiness and higher assessed lending risk | Analyze frequency of defaults across `loan_grade` categories, perform Chi-square test for association |
+| **H4:** Shorter `person_emp_length` (employment length) is associated with higher default risk | Borrowers with shorter employment histories may experience less income stability, increasing repayment risk | Visualize distribution of `person_emp_length` by `loan_status`, conduct statistical test to confirm difference, correlation analysis, correlation analysis |
 
+These hypotheses will be tested through exploratory data analysis and modeling to identify the most influential predictors of default risk.
 
 ## The rationale to map the business requirements to the Data Visualizations and ML tasks
 This section explains how each business requirement is addressed by specific analyses, visualizations and ML techniques. It ensures that insights and predictions directly support the business goals and can be interpreted by stakeholders.
@@ -124,21 +123,22 @@ This section explains how each business requirement is addressed by specific ana
 We aim to develop a **supervised** machine learning model that predicts whether a loan applicant  will default or not.  
 In addition to the binary outcome, the model will provide a **probability of default** to support the credit risk team in decision-making.
 
-- **Goal:** Predict if a borrower will default on their loan (`Default` variable) and provide the associated probability.  
+- **Goal:** Predict if a borrower will default on their loan (`loan_status`) and provide the associated probability of default.  
 - **Model type:** Supervised — Binary Classification.  
-- **Input features:** All borrower demographic and financial attributes, excluding identifiers such as `LoanID`.  
-- **Model choice:** To be determined after experimentation. Candidate models include Logistic Regression, Random Forest, and Gradient Boosting (XGBoost, LightGBM).  
+- **Input features:** All borrower demographic and financial attributes
+- **Model choice:** To be determined after experimentation. Candidate models include Logistic Regression, Random Forest, and Gradient Boosting.  
 - **Success metrics (on both training and test sets):**  
   - Accuracy ≥ 0.80   (OPTIONAL)
   - Recall ≥ 0.80 (to minimize false negatives — high-risk borrowers predicted as safe)  
   - ROC-AUC ≥ 0.90   (OPTIONAL)
 - **Failure conditions:**  
-  - Model performs poorly on unseen (test) data → indicates overfitting.  
+  - Strong degradation of performance on test data vs. train data → indicates overfitting.  
   - Large imbalance between precision and recall → unreliable predictions.  
 - **Output definition:**  
-  - Binary prediction (0 = no default, 1 = default).  
+  - Binary prediction (`0` = no default, `1` = default).   
   - Probability of default (e.g., 0.76 = 76% chance of default) to guide credit risk decisions.  
-- **Heuristics:** Traditionally, financial institutions rely on fixed credit scores or manual reviews to assess loan risk.  
+- **Heuristics:** Traditionally, financial institutions rely on fixed credit scores or manual reviews to assess loan risk. The model should be used to prioritize risk review and support decision-making (not to fully automate rejections). Thresholds for action should be set in consultation with credit risk stakeholders to balance loss prevention and customer impact.
+ 
 
 #### **Clustering Model — Borrower Segmentation (Optional)**
 
@@ -171,54 +171,53 @@ It will serve two main user groups:
 - **Business analysts:** who need to explore patterns and trends in borrower data.  
 - **Credit officers:** who need actionable information on loan risk and applicant default probability.
 
-### **Page 1: Quick Project Summary**
-- **Purpose:** Provide an overview of the project and orient users.  
+  ### **Page 1: Quick Project Summary**
+- **Purpose:** Provide a clear overview of the project and orient users.  
 - **Sections:**
-  - Quick project summary
-  - Project terms & definitions (e.g., “Default”, “DTI Ratio”, “Credit Score”)
-  - Dataset overview (number of records, key variables)
-  - Business requirements
-  - Navigation guide for subsequent pages
+  - Quick project summary  
+  - Project terms & definitions (e.g., “Default”, “Loan Grade”, “Employment Length”, “Income”)  
+  - Dataset overview (number of records, key variables)  
+  - Business requirements  
+  - Navigation guide for subsequent pages 
 
 ### **Page 2: Data Exploration and Correlation Analysis**
 - **Purpose:** Address **Business Requirement 1 (Data Insights)**  
 - **Sections:**
-  - Checkbox: Data inspection (number of rows, columns, and first 10 rows)
-  - Correlation heatmap of numerical variables
-  - Visualization of main drivers of default (e.g., boxplots or histograms for Income, LoanAmount, CreditScore)
-  - Checkbox: Display pairplot or parallel coordinates plot for top correlated variables
-  - Correlation conclusions and considerations
-  - Optional: Display summary statistics and data distribution insights
+  - Checkbox: Data inspection (number of rows, columns, and first 10 rows)  
+  - Correlation heatmap of numerical variables  
+  - Visualization of main drivers of default (e.g., boxplots or histograms for `person_income`, `loan_amnt`, `loan_int_rate`, etc.)  
+  - Checkbox: Display pairplot or parallel coordinates plot for top correlated variables  
+  - Correlation conclusions and considerations  
+  - Optional: Display summary statistics and data distribution insights  
 
 ### **Page 3: Hypothesis Testing and Validation**
 - **Purpose:** Present hypotheses and their validation process.  
 - **Sections:**
-  - State each of the four project hypotheses.
-  - Checkbox: Display corresponding plot for each hypothesis (e.g., boxplot or histogram split by Default)
-  - Checkbox: Display test results (e.g., t-test or chi-square)
-  - Short written conclusions summarizing which hypotheses were validated
-  - Insights and next steps (how findings inform feature selection or model design)
+  - State each of the four project hypotheses.  
+  - Checkbox: Display corresponding plot for each hypothesis (e.g., boxplot or histogram split by `loan_status`)  
+  - Checkbox: Display test results (e.g., t-test or chi-square)  
+  - Short written conclusions summarizing which hypotheses were validated  
+  - Insights and next steps (how findings inform feature selection or model design)  
 
 ### **Page 4: Default Probability Prediction (User Input)**
 - **Purpose:** Address **Business Requirement 2 (Predictive Model)**  
 - **Sections:**
-  - State business requirement 2
-  - Widget input fields for customer data (Age, Income, LoanAmount, CreditScore, etc.)
-  - “Run Predictive Analysis” button that serves the input data to the trained ML pipeline
-  - Output:
-    - Predicted default status (Yes/No)
-    - Probability of default (e.g., 73%)
-    - Top 3 contributing factors (based on feature importance or SHAP)
-  - Optional: Explanation panel for model interpretation (if SHAP/LIME added later)
-
+  - State Business Requirement 2  
+  - Widget input fields for neccessary borrower data  
+  - “Run Predictive Analysis” button to send input data through the trained ML pipeline  
+  - Output:  
+    - Predicted default status (Yes/No)  
+    - Probability of default (e.g., 73%)  
+    - Top 3 contributing factors (based on feature importance or SHAP) 
+  
 ### **Page 5: Classification Model Insights**
 - **Purpose:** Show model performance and interpretation.  
 - **Sections:**
-  - Model overview and ML pipeline steps
-  - Model evaluation metrics (Accuracy, Precision, Recall, F1, AUC)
-  - Confusion matrix, ROC curve, Precision–Recall curve
-  - Feature importance visualization
-  - Considerations and conclusions (model interpretability and limitations)
+  - Model overview and ML pipeline steps  
+  - Model evaluation metrics (Precision, Recall, F1-score, Accuracy, AUC)  
+  - Confusion matrix, ROC curve, Precision–Recall curve  
+  - Feature importance visualization 
+  - Considerations and conclusions (model interpretability and limitations)  
 
 ### **Page 6: Borrower Clustering Insights (Optional)**
 - **Purpose:** Address **Business Requirement 3 (Clustering Model)**  
@@ -230,6 +229,7 @@ It will serve two main user groups:
   - Bar chart comparing clusters by default rate
   - Cluster interpretation summary (e.g., “Cluster 2 — low income, high DTI, high default risk”)
   - Considerations and conclusions (business use of segmentation)
+
 
 
 ## Unfixed Bugs
