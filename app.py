@@ -5,10 +5,10 @@ from app_pages.multipage import MultiPage
 from app_pages.page_summary import page_summary_body
 from app_pages.page_loan_default_study import page_loan_default_study_body
 from app_pages.page_predict_input import page_predict_input_body
-from app_pages.page_project_hypothesis import page_project_hypothesis_body
+# from app_pages.page_project_hypothesis import page_project_hypothesis_body
 from app_pages.page_predict_model import page_predict_model_body
 #from app_pages.page_predict_tenure import page_predict_tenure_body
-from app_pages.page_cluster import page_cluster_body
+# from app_pages.page_cluster import page_cluster_body
 
 app = MultiPage(app_name="Loan Guard") # Create an instance of the app 
 
