@@ -1,3 +1,44 @@
-# you should list here the libraries you will use in the project
-streamlit==0.85.0
-altair<5
+# Check which are actually neccessary for streamlit!
+# numpy==1.26.0
+# pandas==2.3.3
+# matplotlib==3.7.2
+# seaborn==0.13.2
+# plotly==6.3.1
+# streamlit==1.50.0
+# feature_engine==1.9.3
+# imbalanced-learn==0.14.0
+# scikit-learn==1.7.2
+# xgboost==3.1.1
+
+# numpy==1.26.1
+# pandas==2.1.1
+# matplotlib==3.7.2
+# seaborn==0.13.2
+# #ydata-profiling==4.8.3 # This package can be removed prior to deployment
+# #ipython==8.24.0 # This package can be removed prior to deployment
+# #setuptools==80.9.0 # This package can be removed prior to deployment
+# plotly==5.17.0
+# ppscore==1.1.0 # This package can be removed prior to deployment
+# streamlit==1.40.2
+# feature-engine==1.6.1
+# imbalanced-learn==0.11.0
+# scikit-learn==1.3.1
+# xgboost==1.7.6
+
+numpy==1.26.1
+pandas==2.1.1
+matplotlib==3.8.0
+seaborn==0.13.2
+#ydata-profiling==4.12.0 # This package can be removed prior to deployment
+plotly==5.17.0
+ppscore==1.1.0 
+streamlit==1.40.2
+#feature-engine==1.6.1
+#imbalanced-learn==0.11.0
+scikit-learn==1.3.1
+#xgboost==1.7.6
+#yellowbrick==1.5 # This package can be removed prior to deployment
+#Pillow==10.0.1 # This package can be removed prior to deployment
+
+# additional for vs code
+# ipykernel
