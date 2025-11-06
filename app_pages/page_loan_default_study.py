@@ -1,6 +1,6 @@
 import plotly.express as px
 import numpy as np
-from feature_engine.discretisation import ArbitraryDiscretiser
+# from feature_engine.discretisation import ArbitraryDiscretiser
 import streamlit as st
 from src.data_management import load_default_data
 
@@ -59,7 +59,7 @@ def page_loan_default_study_body():
     st.write("---")
 
     # Correlation Study 
-    st.write("### Correlation Analysis")
+    st.write("## Correlation Analysis")
     st.write(
         f"A correlation study was conducted to identify relationships between variables and the target feature. "
         f"To demonstrate the results, we use the **Predictive Power Score (PPS)**, which detects both linear and non-linear relationships between two variables. "
@@ -82,7 +82,7 @@ def page_loan_default_study_body():
         )
     st.write("---")
     
-    st.write("### Relationships between Key Features and Loan Default")
+    st.write("## Relationships between Key Features and Loan Default")
     st.write(
         f"Now we can explore the distributions of the identified key borrower and loan features "
         f"and how they relate to the loan default outcome. By visualizing these patterns, "
