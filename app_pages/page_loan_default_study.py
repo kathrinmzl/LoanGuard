@@ -1,5 +1,6 @@
 import plotly.express as px
 import numpy as np
+import pandas as pd
 # from feature_engine.discretisation import ArbitraryDiscretiser
 import streamlit as st
 from src.data_management import load_default_data
@@ -18,7 +19,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 # Answers business requirement 1
 
 target_var = "loan_status"
-PPS_Threshold = 0.01
+PPS_Threshold = 0.04
 
 # Body
 def page_loan_default_study_body():
@@ -33,7 +34,7 @@ def page_loan_default_study_body():
     
     vars_to_study = get_important_features(df, target_var, PPS_Threshold).index.tolist()
 
-    df_eda = df.filter(vars_to_study + [target_var])
+    df_eda = df.filter([target_var]+vars_to_study)
     
     st.title("Loan Default Study")
 
@@ -71,11 +72,11 @@ def page_loan_default_study_body():
     if st.checkbox("Inspect PPS Correlation Heatmap"):
         heatmap_pps(df)
     # PPS Table
-    st.success(
+    st.info(
         f"The strongest relationships with the target variable can be identified for the following features: "
     )
     st.dataframe(get_important_features(df, target_var, PPS_Threshold))
-    st.info(
+    st.success(
         f"The correlation analysis reveals that correlations with the target are generally low. "
         f"These findings are consistent with business logic and indicate that default behavior is influenced "
         f"by a combination of factors rather than a single feature."
@@ -102,12 +103,23 @@ def page_loan_default_study_body():
         f"This doesn't mean all defaulting customers have all these patterns at the same time; "
         f"these are just factors that influence the probability of default."
      )
+    
+    """
+    Add: 
+    > NOTE: Interest rates are strongly correlated with the loan grade. Having a lower/worse loan grade implies that a borrower 
+    will have worse loan terms including higher interest rates. Therefore, having a higher interest rate directly implies that the borrower is more risky.
+    """
 
+    st.write('### Parallel Plot')
+    st.write('The following parallel plot further helps to explore how these variables interact together to influence default outcomes.')
     # Parallel plot
-    # if st.checkbox("Parallel Plot"):
-    #     st.write(
-    #         f"* Information in white indicates the profile from a churned customer")
-    #     parallel_plot_churn(df_eda)
+    if st.checkbox("Show Parallel Plot"):
+        st.write(
+            f"* Information in green indicates the profile from a defaulted borrower")
+        parallel_plot_default(df_eda)
+        st.success("The plot highlights how key borrower and loan attributes interact with each other and with default status. "
+                   "We can see that higher loan amounts relative to income, higher interest rates and paying rent "
+                   "tend to be associated with increased default probability.")
 
 
 # Plots 
@@ -204,28 +216,18 @@ def plot_numerical(df, col, target_var):
 
 
 # function created using "02 - Churned Customer Study" notebook code - Parallel Plot section
-# def parallel_plot_churn(df_eda):
+def parallel_plot_default(df_eda):
+    
+    # Discretize numerical features into quartile bins
+    df_eda['loan_int_rate'] = pd.qcut(df_eda['loan_int_rate'], q=4,
+        labels=['Low', 'Medium', 'High', 'Very High'])
 
-#     # hard coded from "disc.binner_dict_['tenure']"" result,
-#     tenure_map = [-np.Inf, 6, 12, 18, 24, np.Inf]
-#     # found at "02 - Churned Customer Study" notebook
-#     # under "Parallel Plot" section
-#     disc = ArbitraryDiscretiser(binning_dict={'tenure': tenure_map})
-#     df_parallel = disc.fit_transform(df_eda)
+    df_eda['loan_percent_income'] = pd.qcut(df_eda['loan_percent_income'], q=4,
+        labels=['Low', 'Medium', 'High', 'Very High'])
 
-#     n_classes = len(tenure_map) - 1
-#     classes_ranges = disc.binner_dict_['tenure'][1:-1]
-#     LabelsMap = {}
-#     for n in range(0, n_classes):
-#         if n == 0:
-#             LabelsMap[n] = f"<{classes_ranges[0]}"
-#         elif n == n_classes-1:
-#             LabelsMap[n] = f"+{classes_ranges[-1]}"
-#         else:
-#             LabelsMap[n] = f"{classes_ranges[n-1]} to {classes_ranges[n]}"
-
-#     df_parallel['tenure'] = df_parallel['tenure'].replace(LabelsMap)
-#     fig = px.parallel_categories(
-#         df_parallel, color="Churn", width=750, height=500)
-#     # we use st.plotly_chart() to render, in notebook is fig.show()
-#     st.plotly_chart(fig)
+    fig = px.parallel_categories(
+        df_eda, color="loan_status", 
+        color_continuous_scale=px.colors.diverging.RdYlGn,
+        width=750, height=500)
+    # we use st.plotly_chart() to render, in notebook is fig.show()
+    st.plotly_chart(fig)
