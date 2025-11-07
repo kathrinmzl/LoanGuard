@@ -4,6 +4,7 @@ import pandas as pd
 # from feature_engine.discretisation import ArbitraryDiscretiser
 import streamlit as st
 from src.data_management import load_default_data
+from src.plots import plot_categorical, plot_numerical
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -165,54 +166,54 @@ def plot_default_level_per_variable(df_eda, target_var):
             plot_numerical(df_eda, col, target_var)
 
 
-def plot_categorical(df, col, target_var):
-    # Create interactive countplot
-    fig = px.histogram(
-        df,
-        x=col,
-        color=target_var,
-        barmode="group",  # shows bars side by side like hue in seaborn
-        category_orders={col: df[col].value_counts().index.tolist()},  # preserves order
-        color_discrete_sequence=px.colors.qualitative.Set2
-    )
+# def plot_categorical(df, col, target_var):
+#     # Create interactive countplot
+#     fig = px.histogram(
+#         df,
+#         x=col,
+#         color=target_var,
+#         barmode="group",  # shows bars side by side like hue in seaborn
+#         category_orders={col: df[col].value_counts().index.tolist()},  # preserves order
+#         color_discrete_sequence=px.colors.qualitative.Set2
+#     )
 
-    fig.update_layout(
-        title_text=f"{col}",
-        title_x=0.5,
-        xaxis_title="",
-        yaxis_title="Count",
-        legend_title=target_var
-    )
+#     fig.update_layout(
+#         title_text=f"{col}",
+#         title_x=0.5,
+#         xaxis_title="",
+#         yaxis_title="Count",
+#         legend_title=target_var
+#     )
 
-    st.plotly_chart(fig, use_container_width=True)
+#     st.plotly_chart(fig, use_container_width=True)
     
     
-def plot_numerical(df, col, target_var):
-    fig = px.histogram(
-        df,
-        x=col,
-        color=target_var,
-        barmode="overlay",       # overlay bars for each target class
-        histnorm='',             # raw counts, can also use 'percent'
-        marginal="box",
-        color_discrete_sequence=px.colors.qualitative.Set2,
-        nbins=50                # adjust for resolution
-    )
+# def plot_numerical(df, col, target_var):
+#     fig = px.histogram(
+#         df,
+#         x=col,
+#         color=target_var,
+#         barmode="overlay",       # overlay bars for each target class
+#         histnorm='',             # raw counts, can also use 'percent'
+#         marginal="box",
+#         color_discrete_sequence=px.colors.qualitative.Set2,
+#         nbins=50                # adjust for resolution
+#     )
 
-    fig.update_traces(
-        marker_line_width=1,
-        marker_line_color="black"
-    )
+#     fig.update_traces(
+#         marker_line_width=1,
+#         marker_line_color="black"
+#     )
 
-    fig.update_layout(
-        title_text=f"{col}",
-        title_x=0.5,
-        xaxis_title="",
-        yaxis_title="Count",
-        legend_title=target_var
-    )
+#     fig.update_layout(
+#         title_text=f"{col}",
+#         title_x=0.5,
+#         xaxis_title="",
+#         yaxis_title="Count",
+#         legend_title=target_var
+#     )
 
-    st.plotly_chart(fig, use_container_width=True)
+#     st.plotly_chart(fig, use_container_width=True)
 
 
 # function created using "02 - Churned Customer Study" notebook code - Parallel Plot section
