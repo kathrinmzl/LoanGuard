@@ -11,7 +11,7 @@ from src.machine_learning.predictive_analysis_ui import (
 def page_predict_input_body():
 
     # load predict default files
-    version = 'v1'
+    version = 'v2'
     default_pipe_dc_fe = load_pkl_file(
         f'outputs/ml_pipeline/predict_default/{version}/clf_pipeline_data_cleaning_feat_eng.pkl')
     default_pipe_model = load_pkl_file(
