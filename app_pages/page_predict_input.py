@@ -31,19 +31,34 @@ def page_predict_input_body():
 
     st.title("Default Prediction Tool")
     
+    # st.info(
+    #     f"This page implements Business Requirement 2: 'Develop a machine learning model capable  "
+    #     f"of predicting whether a loan applicant is likely to default. The system should output a "
+    #     f"probability of default to support the credit team in decision-making.'\n\n"
+    #     f"The model evaluates a borrower's probability of default given the key inputs of "
+    #     f"`loan_amnt`, `person_income` and `loan_int_rate`. For a given borrower's income, "
+    #     f"the credit team can determine whether the requested loan amount is likely to be "
+    #     f"repayable at the selected interest rate.\n\n"
+    #     f"If the predicted probability of default is moderate or high under the current terms, "
+    #     f"the credit team can take action — for example, lower the approved loan amount, reduce the "
+    #     f"interest rate or decline the loan application — to reduce default risk. These interventions help balance loss prevention "
+    #     f"with borrower impact and improve overall financial stability."
+    # )
     st.info(
         f"This page implements Business Requirement 2: 'Develop a machine learning model capable  "
         f"of predicting whether a loan applicant is likely to default. The system should output a "
         f"probability of default to support the credit team in decision-making.'\n\n"
-        f"The model evaluates a borrower's probability of default given the key inputs of "
-        f"`loan_amnt`, `person_income` and `loan_int_rate`. For a given borrower's income, "
-        f"the credit team can determine whether the requested loan amount is likely to be "
-        f"repayable at the selected interest rate.\n\n"
-        f"If the predicted probability of default is moderate or high under the current terms, "
-        f"the credit team can take action — for example, lower the approved loan amount, reduce the "
-        f"interest rate or decline the loan application — to reduce default risk. These interventions help balance loss prevention "
-        f"with borrower impact and improve overall financial stability."
+        f"The system now provides two outputs for a live borrower:\n"
+        f"1. A **probability of default** based on key inputs such as `loan_amnt`, `person_income`, and `loan_int_rate`.\n"
+        f"2. A **cluster assignment**, which segments borrowers into groups with historically similar default behavior and financial profiles.\n\n"
+        f"For a given borrower's income, loan amount, and interest rate, the credit team can assess repayment likelihood and "
+        f"also consider the borrower's cluster to understand broader risk characteristics (e.g., prior defaults, home ownership, income level).\n\n"
+        f"If the predicted probability of default is moderate or high under the current terms, and/or the borrower belongs to a higher-risk cluster, "
+        f"the credit team can take targeted actions — for example, lower the approved loan amount, require additional guarantees, or decline the application — "
+        f"to reduce default risk."
     )
+    st.warning(f"**Note:** The thresholds for business recommendations (low, moderate, high risk) should be determined according to the institution's risk appetite.")
+
 
     st.write("---")
 
@@ -68,7 +83,7 @@ def page_predict_input_body():
     #     predict_cluster(X_live, cluster_features,
     #                     cluster_pipe, cluster_profile)
         
-    if st.button("Run Predictive Analysis 2"):
+    if st.button("Run Predictive Analysis"):
         predict_default_and_cluster(
             X_live, 
             default_features, default_pipe_dc_fe, default_pipe_model, 
@@ -138,7 +153,6 @@ def DrawInputsWidgets():
             step=10
         )
     X_live[feature] = st_widget
-    
     
     with col2:
         feature = "loan_amnt"

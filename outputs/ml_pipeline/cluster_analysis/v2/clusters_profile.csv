@@ -1,0 +1,4 @@
+Cluster,person_home_ownership,cb_person_default_on_file,person_income,loan_status
+2,"'MORTGAGE': 93% , 'OWN': 6% , 'OTHER': 1% ",'N': 100% ,50400.0 -- 96000.0,"'0': 91% , '1': 9% "
+1,"'RENT': 90% , 'OWN': 10% , 'MORTGAGE': 0% ",'N': 100% ,33000.0 -- 64144.0,"'0': 74% , '1': 26% "
+0,"'RENT': 57% , 'MORTGAGE': 35% , 'OWN': 8% ",'Y': 100% ,36000.0 -- 78000.0,"'0': 62% , '1': 38% "
