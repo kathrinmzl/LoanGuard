@@ -6,9 +6,12 @@ from feature_engine.outliers import Winsorizer
 from feature_engine.imputation import MeanMedianImputer
 
 @st.cache_data
-def load_default_data(clean=False):
-    df = pd.read_csv("outputs/datasets/collection/LoanDefaultData.csv").drop_duplicates()
+def load_default_data(clean=False, drop_duplicates=False):
+    df = pd.read_csv("outputs/datasets/collection/LoanDefaultData.csv")
     
+    if drop_duplicates:
+        df.drop_duplicates(inplace=True)
+        
     if clean:
         imputer = MeanMedianImputer(imputation_method='median', variables=['person_emp_length', 'loan_int_rate'])
         df = imputer.fit_transform(df)

@@ -28,7 +28,7 @@ def page_cluster_model_body():
     ).columns.to_list()
 
     # DataFrame for cluster distribution
-    df_cluster_vs_default = load_default_data().filter(['loan_status'], axis=1)
+    df_cluster_vs_default = load_default_data(drop_duplicates=True).filter(['loan_status'], axis=1)
     df_cluster_vs_default['Clusters'] = cluster_pipe['model'].labels_
 
     st.write("### ML Pipeline: Cluster Analysis")
