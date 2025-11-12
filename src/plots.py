@@ -1,5 +1,14 @@
+"""
+Reusable plotting utilities.
+
+This module defines reusable visualization functions used across multiple
+pages of the app to ensure consistent, interactive, and interpretable
+data exploration.
+"""
+
 import streamlit as st
 import plotly.express as px
+
 
 def plot_categorical(df, col, target_var):
     # Create interactive countplot
@@ -8,7 +17,7 @@ def plot_categorical(df, col, target_var):
         x=col,
         color=target_var,
         barmode="group",  # shows bars side by side like hue in seaborn
-        category_orders={col: df[col].value_counts().index.tolist()},  # preserves order
+        category_orders={col: df[col].value_counts().index.tolist()},
         color_discrete_sequence=px.colors.qualitative.Set2
     )
 
@@ -21,8 +30,8 @@ def plot_categorical(df, col, target_var):
     )
 
     st.plotly_chart(fig, use_container_width=True)
-    
-    
+
+
 def plot_numerical(df, col, target_var):
     fig = px.histogram(
         df,

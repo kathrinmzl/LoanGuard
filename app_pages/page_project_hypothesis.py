@@ -1,3 +1,10 @@
+"""
+Project Hypotheses & Validation Page.
+
+This module renders the page that evaluates the four key hypotheses
+related to factors influencing loan default risk.
+"""
+
 import streamlit as st
 from scipy.stats import chi2_contingency, mannwhitneyu
 import pandas as pd
@@ -7,7 +14,7 @@ from src.data_management import load_default_data
 
 def page_project_hypothesis_body():
     """
-    Render the  Project Hypotheses & Validation page
+    Render the Project Hypotheses & Validation page
 
     Displays and validates the key hypotheses formulated to understand
     factors influencing loan default risk.
@@ -21,11 +28,13 @@ def page_project_hypothesis_body():
     # Page title and introduction
     st.title("Project Hypotheses & Validation")
     st.info(
-        "To understand the factors influencing loan default risk, we formulated "
-        "four hypotheses grounded in domain knowledge and observed patterns. "
-        "Each hypothesis focuses on a feature expected to affect default probability.\n\n"
-        "We validate them using data distributions and statistical significance tests "
-        "(Mann–Whitney U or Chi-Square), confirming whether differences are meaningful."
+        "To understand the factors influencing loan default risk, we "
+        "formulated four hypotheses grounded in domain knowledge and "
+        "observed patterns. Each hypothesis focuses on a feature expected "
+        "to affect default probability.\n\n"
+        "We validate them using data distributions and statistical "
+        "significance tests (Mann–Whitney U or Chi-Square), confirming "
+        "whether differences are meaningful."
     )
 
     # Hypothesis 1
@@ -37,7 +46,8 @@ def page_project_hypothesis_body():
     )
     st.write("### Validation Result")
     st.success(
-        "✅ Confirmed: Defaulted borrowers generally have higher loan amounts.\n"
+        "✅ Confirmed: Defaulted borrowers generally have higher "
+        "loan amounts.\n"
         "* The distribution plot supports this observation.\n"
         "* The difference in distributions is statistically significant."
     )
@@ -51,8 +61,8 @@ def page_project_hypothesis_body():
     st.write("## Hypothesis 2")
     st.warning("Lower `person_income` is associated with higher default risk.")
     st.info(
-        "Borrowers with lower income may have limited financial capacity to "
-        "meet repayment obligations."
+        "Borrowers with lower income may have limited financial capacity "
+        "to meet repayment obligations."
     )
     st.write("### Validation Result")
     st.success(
@@ -68,15 +78,20 @@ def page_project_hypothesis_body():
 
     # Hypothesis 3
     st.write("## Hypothesis 3")
-    st.warning("Lower `loan_grade` (credit quality) is associated with higher default risk.")
+    st.warning(
+        "Lower `loan_grade` (credit quality) is associated with higher "
+        "default risk."
+    )
     st.info(
-        "A lower loan grade reflects weaker creditworthiness and a higher assessed lending risk."
+        "A lower loan grade reflects weaker creditworthiness and a higher "
+        "assessed lending risk."
     )
     st.write("### Validation Result")
     st.success(
         "✅ Confirmed: Loans with lower grades default more frequently.\n"
         "* The plot shows this trend clearly.\n"
-        "* The Chi-Square test confirms the association is statistically significant."
+        "* The Chi-Square test confirms the association is statistically "
+        "significant."
     )
 
     if st.checkbox("Show Validation: Loan Grade vs. Default"):
@@ -86,15 +101,17 @@ def page_project_hypothesis_body():
 
     # Hypothesis 4
     st.write("## Hypothesis 4")
-    st.warning("Shorter `person_emp_length` is associated with higher default risk.")
+    st.warning(
+        "Shorter `person_emp_length` is associated with higher default risk."
+    )
     st.info(
-        "Borrowers with shorter employment histories may have less income stability, "
-        "increasing repayment risk."
+        "Borrowers with shorter employment histories may have less income "
+        "stability, increasing repayment risk."
     )
     st.write("### Validation Result")
     st.success(
-        "✅ Confirmed: Defaulted borrowers typically have shorter employment histories.\n"
-        "* The distribution plot supports this.\n"
+        "✅ Confirmed: Defaulted borrowers typically have shorter employment "
+        "histories.\n* The distribution plot supports this.\n"
         "* The Mann–Whitney U test confirms statistical significance."
     )
 
@@ -105,13 +122,14 @@ def page_project_hypothesis_body():
 
 
 # --- Helper Functions --- #
-
 def run_mannwhitneyu(df, col, target_var, direction):
     """Run and display the Mann–Whitney U test for numerical variables."""
     defaulted = df[df[target_var] == 1][col]
     non_defaulted = df[df[target_var] == 0][col]
 
-    stat, p_val = mannwhitneyu(defaulted, non_defaulted, alternative='two-sided')
+    stat, p_val = mannwhitneyu(defaulted,
+                               non_defaulted,
+                               alternative='two-sided')
 
     st.write("#### Mann–Whitney U Test Result")
     st.write(f"p-value: {p_val:.4f}")
@@ -123,8 +141,8 @@ def run_mannwhitneyu(df, col, target_var, direction):
         )
     else:
         st.info(
-            f"❌ No statistically significant difference in `{col}` "
-            f"between defaulted and non-defaulted borrowers (p ≥ 0.05)."
+            f"❌ No statistically significant difference in `{col}` between "
+            f"defaulted and non-defaulted borrowers (p ≥ 0.05)."
         )
 
 
@@ -143,6 +161,6 @@ def run_chisquare(df, col, target_var):
         )
     else:
         st.info(
-            f"❌ No statistically significant association found between `{col}` "
-            f"and default risk (p ≥ 0.05)."
+            f"❌ No statistically significant association found between "
+            f"`{col}` and default risk (p ≥ 0.05)."
         )

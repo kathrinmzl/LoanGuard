@@ -7,45 +7,54 @@ from src.machine_learning.evaluate_clf import clf_performance
 
 def page_predict_model_body():
     """
-    Render the ML Model Insights page
+    Render the ML Prediction Model Insights page.
 
-    Displays information about the trained Loan Default Prediction model,
-    including.
-
-    This page helps technical and business users understand how well the
-    model identifies potential loan defaulters and whether it meets the
-    recall and F1-score goals required for deployment.
+    This page presents details about the supervised classification model
+    developed to predict loan default risk. It shows the ML pipeline,
+    key features, evaluation metrics, and interpretation of results.
     """
 
     version = 'v2'
 
     # Load saved model assets
     default_pipe_dc_fe = load_pkl_file(
-        f'outputs/ml_pipeline/predict_default/{version}/clf_pipeline_data_cleaning_feat_eng.pkl')
+        f"outputs/ml_pipeline/predict_default/{version}/"
+        f"clf_pipeline_data_cleaning_feat_eng.pkl"
+    )
     default_pipe_model = load_pkl_file(
-        f"outputs/ml_pipeline/predict_default/{version}/clf_pipeline_model.pkl")
+        f"outputs/ml_pipeline/predict_default/{version}/"
+        f"clf_pipeline_model.pkl"
+    )
     default_feat_importance = plt.imread(
-        f"outputs/ml_pipeline/predict_default/{version}/features_importance.png")
+        f"outputs/ml_pipeline/predict_default/{version}/"
+        f"features_importance.png"
+    )
 
     X_train = pd.read_csv(
-        f"outputs/ml_pipeline/predict_default/{version}/X_train.csv")
+        f"outputs/ml_pipeline/predict_default/{version}/X_train.csv"
+    )
     X_test = pd.read_csv(
-        f"outputs/ml_pipeline/predict_default/{version}/X_test.csv")
+        f"outputs/ml_pipeline/predict_default/{version}/X_test.csv"
+    )
     y_train = pd.read_csv(
-        f"outputs/ml_pipeline/predict_default/{version}/y_train.csv").values
+        f"outputs/ml_pipeline/predict_default/{version}/y_train.csv"
+    ).values
     y_test = pd.read_csv(
-        f"outputs/ml_pipeline/predict_default/{version}/y_test.csv").values
+        f"outputs/ml_pipeline/predict_default/{version}/y_test.csv"
+    ).values
 
     # Page title and success criteria
-    st.title("ML Model Insights")
+    st.title("ML Prediction Model Insights")
 
     st.info(
-        f"### Model Objective\n"
-        f"The model aims to identify potential **loan defaulters** early.\n\n"
-        f"Success is defined by meeting these criteria (both on train & test sets):\n"
-        f"- **Recall (Default) ≥ 0.75** — minimize false negatives "
-        f"(don’t miss high-risk borrowers)\n"
-        f"- **F1 Score (Default) ≥ 0.60** — maintain balance between recall and precision"
+        "### Model Objective\n"
+        "The model aims to identify potential **loan defaulters** early.\n\n"
+        "Success is defined by meeting these criteria "
+        "(both on train & test sets):\n"
+        "- **Recall (Default) ≥ 0.75** — minimize false negatives "
+        "(don’t miss high-risk borrowers)\n"
+        "- **F1 Score (Default) ≥ 0.60** — maintain balance between "
+        "recall and precision"
     )
 
     # Pipelines overview
@@ -75,20 +84,23 @@ def page_predict_model_body():
     # Interpretation and business insights
     st.write("## Interpretation & Business Relevance")
     st.success(
-        f"**Performance Summary:**\n\n"
-        f"- **Train Set (Default class):** Recall = 0.82, F1 = 0.80 ✅\n"
-        f"- **Test Set (Default class):** Recall = 0.80, F1 = 0.61 ✅\n\n"
-        f"Both metrics meet the defined success criteria. "
-        f"The model performs consistently across training and test data.\n\n"
-        f"**Observations:**\n"
-        f"* Recall remains high, ensuring most high-risk borrowers are detected.\n"
-        f"* F1 score shows a moderate drop from train to test (0.80 → 0.61), "
-        f"reflecting expected variability due to resampling and unseen data.\n"
-        f"* The drop is acceptable and indicates **no severe overfitting**.\n\n"
-        f"**Business Insight:**\n"
-        f"* The model effectively prioritizes recall, aligning with the goal "
-        f"of minimizing missed defaulters.\n"
-        f"* Slight precision trade-off is acceptable in exchange for better risk control.\n"
-        f"* Overall, the pipeline demonstrates good generalization and is "
-        f"suitable for deployment in a real credit risk monitoring context."
+        "**Performance Summary:**\n\n"
+        "- **Train Set (Default class):** Recall = 0.82, F1 = 0.80 ✅\n"
+        "- **Test Set (Default class):** Recall = 0.80, F1 = 0.61 ✅\n\n"
+        "Both metrics meet the defined success criteria. "
+        "The model performs consistently across training and test data.\n\n"
+        "**Observations:**\n"
+        "* Recall remains high, ensuring most high-risk borrowers are "
+        "detected.\n"
+        "* F1 score shows a moderate drop from train to test (0.80 → 0.61), "
+        "reflecting expected variability due to resampling and unseen "
+        "data.\n"
+        "* The drop is acceptable and indicates no severe overfitting.\n\n"
+        "**Business Insight:**\n"
+        "* The model effectively prioritizes recall, aligning with the goal "
+        "of minimizing missed defaulters.\n"
+        "* Slight precision trade-off is acceptable in exchange for better "
+        "risk control.\n"
+        "* Overall, the pipeline demonstrates good generalization and is "
+        "suitable for deployment in a real credit risk monitoring context."
     )
