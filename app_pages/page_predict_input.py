@@ -1,10 +1,7 @@
 import streamlit as st
 import pandas as pd
 from src.data_management import load_default_data, load_pkl_file
-from src.machine_learning.predictive_analysis_ui import (
-    predict_default)#,
-   # predict_tenure,
-    #predict_cluster)
+from src.machine_learning.predictive_analysis_ui import predict_default_and_cluster
 
 # answers business requirement 2
 
@@ -21,16 +18,16 @@ def page_predict_input_body():
                       .to_list()
                       )
 
-    # # load cluster analysis files
-    # version = 'v1'
-    # cluster_pipe = load_pkl_file(
-    #     f"outputs/ml_pipeline/cluster_analysis/{version}/cluster_pipeline.pkl")
-    # cluster_features = (pd.read_csv(f"outputs/ml_pipeline/cluster_analysis/{version}/TrainSet.csv")
-    #                     .columns
-    #                     .to_list()
-    #                     )
-    # cluster_profile = pd.read_csv(
-    #     f"outputs/ml_pipeline/cluster_analysis/{version}/clusters_profile.csv")
+    # load cluster analysis files
+    version = 'v2'
+    cluster_pipe = load_pkl_file(
+        f"outputs/ml_pipeline/cluster_analysis/{version}/cluster_pipeline.pkl")
+    cluster_features = (pd.read_csv(f"outputs/ml_pipeline/cluster_analysis/{version}/TrainSet.csv")
+                        .columns
+                        .to_list()
+                        )
+    cluster_profile = pd.read_csv(
+        f"outputs/ml_pipeline/cluster_analysis/{version}/clusters_profile.csv")
 
     st.title("Default Prediction Tool")
     
@@ -53,7 +50,7 @@ def page_predict_input_body():
     # Generate/save Live Data
     
     # use to check which inout variables you will need to implement
-    # check_variables_for_UI(default_features)
+    # check_variables_for_UI(default_features, cluster_features)
     X_live = DrawInputsWidgets()
 
     '''
@@ -64,31 +61,39 @@ def page_predict_input_body():
     will belong in the customer base.
     '''
     # predict on live data
-    if st.button("Run Predictive Analysis"):
-        predict_default(
-            X_live, default_features, default_pipe_dc_fe, default_pipe_model)
+    # if st.button("Run Predictive Analysis"):
+    #     predict_default(
+    #         X_live, default_features, default_pipe_dc_fe, default_pipe_model)
 
-        # predict_cluster(X_live, cluster_features,
-        #                 cluster_pipe, cluster_profile)
+    #     predict_cluster(X_live, cluster_features,
+    #                     cluster_pipe, cluster_profile)
+        
+    if st.button("Run Predictive Analysis 2"):
+        predict_default_and_cluster(
+            X_live, 
+            default_features, default_pipe_dc_fe, default_pipe_model, 
+            cluster_features, cluster_pipe, cluster_profile
+        )
 
 
-# def check_variables_for_UI( default_features):
-#     # combines all features and displays the unique values.
+
+def check_variables_for_UI( default_features, cluster_features):
+    # combines all features and displays the unique values.
     
-#     import itertools
+    import itertools
 
-#     # The widgets inputs are the features used in all pipelines (tenure, default, cluster)
-#     # We combine them only with unique values
-#     combined_features = set(
-#         # list(
-#         #     itertools.chain(tenure_features, default_features, cluster_features)
-#         # )
-#         list(
-#             itertools.chain(default_features)
-#         )
-#     )
-#     st.write(
-#         f"* There are {len(combined_features)} features for the UI: \n\n {combined_features}")
+    # The widgets inputs are the features used in all pipelines (tenure, default, cluster)
+    # We combine them only with unique values
+    combined_features = set(
+        list(
+            itertools.chain(default_features, cluster_features)
+        )
+        # list(
+        #     itertools.chain(default_features)
+        # )
+    )
+    st.write(
+        f"* There are {len(combined_features)} features for the UI: \n\n {combined_features}")
 
 
 def DrawInputsWidgets():
@@ -112,7 +117,7 @@ def DrawInputsWidgets():
 
     # we create input widgets only for 6 features
     col1, col2, col3 = st.columns(3)
-    # col5, col6, col7, col8 = st.columns(4)
+    col4, col5, col6 = st.columns(3)
 
     # We are using these features to feed the ML pipeline - values copied from check_variables_for_UI() result
     # {'PhoneService', 'MonthlyCharges', 'PaymentMethod', 'InternetService', 'Contract', 'OnlineBackup'}
@@ -123,7 +128,6 @@ def DrawInputsWidgets():
     # from here on we draw the widget based on the variable type (numerical or categorical)
     # and set initial values
     
-
     with col1:
         feature = "person_income"
         st_widget = st.number_input(
@@ -134,6 +138,7 @@ def DrawInputsWidgets():
             step=10
         )
     X_live[feature] = st_widget
+    
     
     with col2:
         feature = "loan_amnt"
@@ -158,8 +163,26 @@ def DrawInputsWidgets():
             format="%.2f"           # always show two decimal places
         )
     X_live[feature] = st_widget  # Add widget to live dataframe
-
+    
+    with col4:
+        feature = "person_home_ownership"
+        st_widget = st.selectbox(
+            label= "Person Home Ownership",
+            options=df[feature].unique() # unqiue values of "person_home_ownership"
+        )
+    X_live[feature] = st_widget  # Add widget to live dataframe
+    
+    with col5:
+        feature = "cb_person_default_on_file"
+        st_widget = st.selectbox(
+            label= "Default on File",
+            options=df[feature].unique() # unqiue values of "cb_person_default_on_file"
+        )
+    X_live[feature] = st_widget  # Add widget to live dataframe
+    
+    
+    
     # show live data table 
-    # st.write(X_live)
+    #st.write(X_live)
 
     return X_live
