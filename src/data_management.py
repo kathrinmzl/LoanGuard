@@ -7,7 +7,7 @@ from feature_engine.imputation import MeanMedianImputer
 
 @st.cache_data
 def load_default_data(clean=False):
-    df = pd.read_csv("outputs/datasets/collection/LoanDefaultData.csv")
+    df = pd.read_csv("outputs/datasets/collection/LoanDefaultData.csv").drop_duplicates()
     
     if clean:
         imputer = MeanMedianImputer(imputation_method='median', variables=['person_emp_length', 'loan_int_rate'])
