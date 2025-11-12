@@ -6,14 +6,14 @@ Developed by [kathrinmzl](https://www.github.com/kathrinmzl)
 ![GitHub last commit](https://img.shields.io/github/last-commit/kathrinmzl/LoanGuard?color=red)
 ![GitHub language count](https://img.shields.io/github/languages/count/kathrinmzl/LoanGuard?color=yellow)
 ![GitHub top language](https://img.shields.io/github/languages/top/kathrinmzl/LoanGuard?color=green)
-[![badge](https://img.shields.io/badge/deployment-Heroku-purple)]( TODO LINK!!)
+[![badge](https://img.shields.io/badge/deployment-Heroku-purple)](https://loan-guard-c4aee35f5523.herokuapp.com/)
 
-In the banking sector, effective credit risk assessment is critical to maintaining financial stability and minimizing losses. Loan defaults can lead to significant financial setbacks and reduced liquidity for lending institutions. The LoanGuard project aims to help financial institutions better understand what drives default risk and proactively identify customers who are likely to default on their loans.
+In the banking sector, effective credit risk assessment is critical to maintaining financial stability and minimizing losses. Loan defaults can lead to significant financial setbacks and reduced liquidity for lending institutions. The LoanGuard project aims to help financial institutions better understand what drives default risk and proactively identify borrowers who are likely to default on their loans.
 
 
 The project was created for educational purposes only.
 
-[Live page on Heroku]( TODO LINK!!)
+[Live page on Heroku](https://loan-guard-c4aee35f5523.herokuapp.com/)
 
 ![Application Mockup](docs/mockup.png) ???
 
@@ -44,10 +44,9 @@ In total, the dataset includes **32,581 records and 12 variables**. The target v
 
 ## Project Terms & Jargon 
 - A **borrower** is a person who takes out a loan from a financial institution.  
-- A **lender** is the institution or company providing the loan to the borrower.  
 - A **loan** is an amount of money borrowed that is expected to be paid back with interest.  
 - A **default** occurs when a borrower fails to make scheduled loan payments or meet the agreed repayment terms.  
-- A **defaulted borrower** is a customer who has failed to repay their loan as agreed and is classified as being in default.  
+- A **defaulted borrower** is a borrower who has failed to repay their loan as agreed and is classified as being in default.  
 - A **non-default** refers to a borrower who repays their loan successfully or continues to make payments on time.  
 
 
@@ -58,27 +57,27 @@ From a business perspective, this project supports the strategic goals of a fina
 
  - Enhancing profitability through optimized loan approval decisions.
 
-- Increasing customer trust and operational efficiency by offering fair, data-driven credit evaluations.
+- Increasing borrower trust and operational efficiency by offering fair, data-driven credit evaluations.
 
- - Enabling personalized loan offerings and proactive interventions for at-risk customers (e.g., adjusted payment plans or counseling).
+ - Enabling personalized loan offerings and proactive interventions for at-risk borrowers (e.g., adjusted payment plans or counseling).
 
 Ultimately, this project aligns predictive analytics with the bank’s long-term objective of balancing growth with financial stability.
 
 To achieve the outlined objectives, the project will focus on the following key requirements.
 
 **Business Requirement 1: Data Insights (Conventional Analysis)**
-- Identify key customer and loan attributes that are most correlated with loan default.
+- Identify key borrower and loan attributes that are most correlated with loan default.
 Provide visual and statistical insights to help business analysts understand the primary drivers of credit risk.
 
 **Business Requirement 2: Predictive Model (Machine Learning)**
 - Develop a machine learning model capable of predicting whether a loan applicant is likely to default. The system should output a probability of default to support the credit team in decision-making.
 
 **Business Requirement 3: Clustering Model (Machine Learning)** - Optional
-- Group borrowers into risk-based clusters to segment customers by credit behavior and improve tailored intervention strategies.
+- Group borrowers into risk-based clusters to segment borrowers by credit behavior and improve tailored intervention strategies.
 
 Additional Considerations: TODO -Adjust/take out?
 
-- Predictions should be explainable, highlighting which factors most influence a customer’s default risk. (OPTIONAL: SHAP/LIME)
+- Predictions should be explainable, highlighting which factors most influence a borrower’s default risk. (OPTIONAL: SHAP/LIME)
 
 - Ethical and fairness considerations must be taken into account to avoid bias against demographic groups. (OPTIONAL: Check later what could done here)
 
@@ -101,7 +100,7 @@ These hypotheses will be tested through exploratory data analysis and modeling t
 This section explains how each business requirement is addressed by specific analyses, visualizations and ML techniques. It ensures that insights and predictions directly support the business goals and can be interpreted by stakeholders.
 
 **Business Requirement 1: Data Insights (Conventional Analysis)**
-- Identify key customer and loan attributes that are most correlated with loan default.
+- Identify key borrower and loan attributes that are most correlated with loan default.
 - Provide visual and statistical insights to help business analysts understand the primary drivers of credit risk.
 - Visualize distributions and relationships between key features and the target variable.
 
@@ -111,7 +110,7 @@ This section explains how each business requirement is addressed by specific ana
 - Evaluate model performance and feature importance for transparency and reliability.
 
 **Business Requirement 3: Clustering Model (Machine Learning) - Optional**
-- Group borrowers into risk-based clusters to segment customers by credit behavior and improve tailored intervention strategies.
+- Group borrowers into risk-based clusters to segment borrowers by credit behavior and improve tailored intervention strategies.
 - Analyze and visualize cluster characteristics to understand risk profiles.
 - Visualize cluster assignments to facilitate understanding by stakeholders. (OPTIONAL)
 
@@ -128,16 +127,15 @@ In addition to the binary outcome, the model will provide a **probability of def
 - **Input features:** All borrower demographic and financial attributes
 - **Model choice:** To be determined after experimentation. Candidate models include Logistic Regression, Random Forest, and Gradient Boosting.  
 - **Success metrics (on both training and test sets):**  
-  - Accuracy ≥ 0.80   (OPTIONAL)
-  - Recall ≥ 0.80 (to minimize false negatives — high-risk borrowers predicted as safe)  
-  - ROC-AUC ≥ 0.90   (OPTIONAL)
+  - Recall for default ≥ 0.75 – to minimize false negatives (high-risk borrowers predicted as safe)
+  - F1 score ≥ 0.60 – ensures a balance between recall and precision
 - **Failure conditions:**  
   - Strong degradation of performance on test data vs. train data → indicates overfitting.  
   - Large imbalance between precision and recall → unreliable predictions.  
 - **Output definition:**  
   - Binary prediction (`0` = no default, `1` = default).   
   - Probability of default (e.g., 0.76 = 76% chance of default) to guide credit risk decisions.  
-- **Heuristics:** Traditionally, financial institutions rely on fixed credit scores or manual reviews to assess loan risk. The model should be used to prioritize risk review and support decision-making (not to fully automate rejections). Thresholds for action should be set in consultation with credit risk stakeholders to balance loss prevention and customer impact.
+- **Heuristics:** Traditionally, financial institutions rely on fixed credit scores or manual reviews to assess loan risk. The model should be used to prioritize risk review and support decision-making (not to fully automate rejections). Thresholds for action should be set in consultation with credit risk stakeholders to balance loss prevention and borrower impact.
  
 
 #### **Clustering Model — Borrower Segmentation (Optional)**
@@ -161,7 +159,7 @@ This segmentation will help the credit and retention teams tailor communication,
 - **Heuristics:** Currently, no formal segmentation process exists.
 
 
-## Dashboard Design
+## Dashboard Design TODO Anpassen je nachdem was wirklich drin ist
 
 The dashboard will be developed in **Streamlit** and designed to guide the user from business understanding to actionable insights and model-based predictions.  
 It will consist of **five main pages**, each mapped to specific business requirements.
@@ -171,16 +169,16 @@ It will serve two main user groups:
 - **Business analysts:** who need to explore patterns and trends in borrower data.  
 - **Credit officers:** who need actionable information on loan risk and applicant default probability.
 
-  ### **Page 1: Quick Project Summary**
+### **Page 1: Project Summary**
 - **Purpose:** Provide a clear overview of the project and orient users.  
 - **Sections:**
-  - Quick project summary  
-  - Project terms & definitions (e.g., “Default”, “Loan Grade”, “Employment Length”, “Income”)  
-  - Dataset overview (number of records, key variables)  
+  - Project introduction  
+  - Project terms & jargon
+  - Dataset overview
   - Business requirements  
   - Navigation guide for subsequent pages 
 
-### **Page 2: Data Exploration and Correlation Analysis**
+### **Page 2: Loan Default Study**
 - **Purpose:** Address **Business Requirement 1 (Data Insights)**  
 - **Sections:**
   - Checkbox: Data inspection (number of rows, columns, and first 10 rows)  
@@ -190,7 +188,7 @@ It will serve two main user groups:
   - Correlation conclusions and considerations  
   - Optional: Display summary statistics and data distribution insights  
 
-### **Page 3: Hypothesis Testing and Validation**
+### **Page 3: Project Hypotheses and Validation**
 - **Purpose:** Present hypotheses and their validation process.  
 - **Sections:**
   - State each of the four project hypotheses.  
@@ -199,7 +197,7 @@ It will serve two main user groups:
   - Short written conclusions summarizing which hypotheses were validated  
   - Insights and next steps (how findings inform feature selection or model design)  
 
-### **Page 4: Default Probability Prediction (User Input)**
+### **Page 4: Default Prediction Tool**
 - **Purpose:** Address **Business Requirement 2 (Predictive Model)**  
 - **Sections:**
   - State Business Requirement 2  
