@@ -3,86 +3,62 @@ import pandas as pd
 from src.data_management import load_default_data, load_pkl_file
 from src.machine_learning.predictive_analysis_ui import predict_default_and_cluster
 
-# answers business requirement 2
-
 def page_predict_input_body():
+    """
+    Streamlit page for predicting loan default probability and borrower cluster.
+    Provides a combined business recommendation based on both predictions.
+    """
 
-    # load predict default files
+    # Load default prediction pipeline
     version = 'v2'
     default_pipe_dc_fe = load_pkl_file(
-        f'outputs/ml_pipeline/predict_default/{version}/clf_pipeline_data_cleaning_feat_eng.pkl')
+        f'outputs/ml_pipeline/predict_default/{version}/clf_pipeline_data_cleaning_feat_eng.pkl'
+    )
     default_pipe_model = load_pkl_file(
-        f"outputs/ml_pipeline/predict_default/{version}/clf_pipeline_model.pkl")
-    default_features = (pd.read_csv(f"outputs/ml_pipeline/predict_default/{version}/X_train.csv")
-                      .columns
-                      .to_list()
-                      )
+        f"outputs/ml_pipeline/predict_default/{version}/clf_pipeline_model.pkl"
+    )
+    default_features = pd.read_csv(
+        f"outputs/ml_pipeline/predict_default/{version}/X_train.csv"
+    ).columns.to_list()
 
-    # load cluster analysis files
-    version = 'v2'
+    # Load cluster analysis pipeline
     cluster_pipe = load_pkl_file(
-        f"outputs/ml_pipeline/cluster_analysis/{version}/cluster_pipeline.pkl")
-    cluster_features = (pd.read_csv(f"outputs/ml_pipeline/cluster_analysis/{version}/TrainSet.csv")
-                        .columns
-                        .to_list()
-                        )
+        f"outputs/ml_pipeline/cluster_analysis/{version}/cluster_pipeline.pkl"
+    )
+    cluster_features = pd.read_csv(
+        f"outputs/ml_pipeline/cluster_analysis/{version}/TrainSet.csv"
+    ).columns.to_list()
     cluster_profile = pd.read_csv(
-        f"outputs/ml_pipeline/cluster_analysis/{version}/clusters_profile.csv")
+        f"outputs/ml_pipeline/cluster_analysis/{version}/clusters_profile.csv"
+    )
 
+    # Page title and explanation
     st.title("Default Prediction Tool")
     
-    # st.info(
-    #     f"This page implements Business Requirement 2: 'Develop a machine learning model capable  "
-    #     f"of predicting whether a loan applicant is likely to default. The system should output a "
-    #     f"probability of default to support the credit team in decision-making.'\n\n"
-    #     f"The model evaluates a borrower's probability of default given the key inputs of "
-    #     f"`loan_amnt`, `person_income` and `loan_int_rate`. For a given borrower's income, "
-    #     f"the credit team can determine whether the requested loan amount is likely to be "
-    #     f"repayable at the selected interest rate.\n\n"
-    #     f"If the predicted probability of default is moderate or high under the current terms, "
-    #     f"the credit team can take action — for example, lower the approved loan amount, reduce the "
-    #     f"interest rate or decline the loan application — to reduce default risk. These interventions help balance loss prevention "
-    #     f"with borrower impact and improve overall financial stability."
-    # )
     st.info(
         f"This page implements Business Requirement 2: 'Develop a machine learning model capable  "
-        f"of predicting whether a loan applicant is likely to default. The system should output a "
-        f"probability of default to support the credit team in decision-making.'\n\n"
-        f"The system now provides two outputs for a live borrower:\n"
+        f"of predicting whether a loan applicant is likely to default and segmenting borrowers into risk clusters.'\n\n"
+        f"The system provides two outputs for a live borrower:\n"
         f"1. A **probability of default** based on key inputs such as `loan_amnt`, `person_income`, and `loan_int_rate`.\n"
         f"2. A **cluster assignment**, which segments borrowers into groups with historically similar default behavior and financial profiles.\n\n"
-        f"For a given borrower's income, loan amount, and interest rate, the credit team can assess repayment likelihood and "
-        f"also consider the borrower's cluster to understand broader risk characteristics (e.g., prior defaults, home ownership, income level).\n\n"
-        f"If the predicted probability of default is moderate or high under the current terms, and/or the borrower belongs to a higher-risk cluster, "
-        f"the credit team can take targeted actions — for example, lower the approved loan amount, require additional guarantees, or decline the application — "
+        f"The credit team can assess repayment likelihood and also consider the borrower's cluster to understand broader risk characteristics "
+        f"(e.g., prior defaults, home ownership, income level).\n\n"
+        f"If the predicted probability of default is moderate or high, and/or the borrower belongs to a higher-risk cluster, "
+        f"the credit team can take targeted actions — e.g., lower the approved loan amount, require additional guarantees, or decline the application — "
         f"to reduce default risk."
     )
-    st.warning(f"**Note:** The thresholds for business recommendations (low, moderate, high risk) should be determined according to the institution's risk appetite.")
-
+    st.warning(
+        "**Note:** The thresholds for business recommendations (low, moderate, high risk) should be determined according to the institution's risk appetite."
+    )
 
     st.write("---")
 
-    # Generate/save Live Data
-    
-    # use to check which inout variables you will need to implement
+    # Draw input widgets for live data
+    # Use helper function to check which input variables you will need to implement
     # check_variables_for_UI(default_features, cluster_features)
     X_live = DrawInputsWidgets()
 
-    '''
-    Answer business logic:
-    The client is interested in determining whether or not a given prospect will default. 
-    If so, the client is interested to know when. 
-    In addition, the client is interested in learning from which cluster this prospect 
-    will belong in the customer base.
-    '''
-    # predict on live data
-    # if st.button("Run Predictive Analysis"):
-    #     predict_default(
-    #         X_live, default_features, default_pipe_dc_fe, default_pipe_model)
-
-    #     predict_cluster(X_live, cluster_features,
-    #                     cluster_pipe, cluster_profile)
-        
+    # Predict default and cluster for the live prospect
     if st.button("Run Predictive Analysis"):
         predict_default_and_cluster(
             X_live, 
@@ -91,112 +67,73 @@ def page_predict_input_body():
         )
 
 
-
-def check_variables_for_UI( default_features, cluster_features):
-    # combines all features and displays the unique values.
-    
+# Helper: show combined features for UI reference
+def check_variables_for_UI(default_features, cluster_features):
     import itertools
+    combined_features = set(itertools.chain(default_features, cluster_features))
+    st.write(f"* There are {len(combined_features)} features for the UI: \n\n {combined_features}")
 
-    # The widgets inputs are the features used in all pipelines (tenure, default, cluster)
-    # We combine them only with unique values
-    combined_features = set(
-        list(
-            itertools.chain(default_features, cluster_features)
-        )
-        # list(
-        #     itertools.chain(default_features)
-        # )
-    )
-    st.write(
-        f"* There are {len(combined_features)} features for the UI: \n\n {combined_features}")
-
-
+# Draw input widgets for live data
 def DrawInputsWidgets():
-    '''
-    return a DataFrame with 1 row containing the prospect’s information.
-    The interactive widgets will feed the data values to the DataFrame in real time.
-      
-    Then, we need to populate the widgets. If it is a categorical variable, we list the available options.
-    If it is a numerical variable, we will set the initial value as the median value from
-    the variable, the minimum widget value as 0.4 of the min from that variable and the maximum widget
-    value as x2 the max value from that variable. 
-    
-    The decision to display the median value and the 0.4
-    and 2.0 are arbitrary, in your project you could set other values if you would like. To populate
-    the proper initial values, we load the dataset, so we can extract the values from it afterwards.
-    '''
-
-    # load dataset
+    """
+    Generates a DataFrame with a single row containing user inputs from interactive widgets.
+    Categorical variables are selectboxes, numerical variables are number inputs with sensible defaults.
+    """
     df = load_default_data()
-    percentageMin = 0.1
+    percentage_min = 0.1  # used to scale min values
 
-    # we create input widgets only for 6 features
+    # Layout: 3 columns per row
     col1, col2, col3 = st.columns(3)
     col4, col5, col6 = st.columns(3)
 
-    # We are using these features to feed the ML pipeline - values copied from check_variables_for_UI() result
-    # {'PhoneService', 'MonthlyCharges', 'PaymentMethod', 'InternetService', 'Contract', 'OnlineBackup'}
-
-    # create an empty DataFrame, which will be the live data
+    # Create empty DataFrame for live input
     X_live = pd.DataFrame([], index=[0])
 
-    # from here on we draw the widget based on the variable type (numerical or categorical)
-    # and set initial values
-    
+    # Numerical Inputs
     with col1:
         feature = "person_income"
-        st_widget = st.number_input(
+        X_live[feature] = st.number_input(
             label="Person Income",
-            min_value=int(df[feature].min()*percentageMin),
+            min_value=int(df[feature].min() * percentage_min),
             max_value=300000, 
             value=int(df[feature].median()),
             step=10
         )
-    X_live[feature] = st_widget
-    
     with col2:
         feature = "loan_amnt"
-        st_widget = st.number_input(
+        X_live[feature] = st.number_input(
             label="Loan Amount",
-            min_value=int(df[feature].min()*percentageMin),
+            min_value=int(df[feature].min() * percentage_min),
             max_value=300000,
             value=int(df[feature].median()),
             step=10
         )
-        
-    X_live[feature] = st_widget
-
     with col3:
         feature = "loan_int_rate"
-        st_widget = st.number_input(
+        X_live[feature] = st.number_input(
             label="Loan Interest Rate",
-            min_value=round(float(df[feature].min() * percentageMin), 2),
+            min_value=round(float(df[feature].min() * percentage_min), 2),
             max_value=round(float(df[feature].max() * 1.5), 2),
             value=round(float(df[feature].median()), 2),
-            step=0.01,              # allows increments of 0.01
-            format="%.2f"           # always show two decimal places
+            step=0.01,
+            format="%.2f"
         )
-    X_live[feature] = st_widget  # Add widget to live dataframe
-    
+
+    # Categorical Inputs
     with col4:
         feature = "person_home_ownership"
-        st_widget = st.selectbox(
-            label= "Person Home Ownership",
-            options=df[feature].unique() # unqiue values of "person_home_ownership"
+        X_live[feature] = st.selectbox(
+            label="Person Home Ownership",
+            options=df[feature].unique()
         )
-    X_live[feature] = st_widget  # Add widget to live dataframe
-    
     with col5:
         feature = "cb_person_default_on_file"
-        st_widget = st.selectbox(
-            label= "Default on File",
-            options=df[feature].unique() # unqiue values of "cb_person_default_on_file"
+        X_live[feature] = st.selectbox(
+            label="Default on File",
+            options=df[feature].unique()
         )
-    X_live[feature] = st_widget  # Add widget to live dataframe
-    
-    
-    
-    # show live data table 
-    #st.write(X_live)
+
+    # Optional: display the live input table
+    # st.write(X_live)
 
     return X_live

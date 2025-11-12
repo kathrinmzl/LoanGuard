@@ -4,7 +4,7 @@ def predict_default_and_cluster(X_live,
                                 default_features, default_pipeline_dc_fe, default_pipeline_model, 
                                 cluster_features, cluster_pipeline, cluster_profile):
     """
-    Predict default risk and cluster for a live prospect, and provide a combined business recommendation.
+    Predict default risk and cluster for live data, and provide a combined business recommendation.
     Supports 3 clusters.
     """
 
