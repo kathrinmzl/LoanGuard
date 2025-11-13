@@ -22,8 +22,8 @@ app.add_page("Project Summary", page_summary_body)
 app.add_page("Loan Default Study", page_loan_default_study_body)
 app.add_page("Project Hypotheses & Validation", page_project_hypothesis_body)
 app.add_page("Default Prediction Tool", page_predict_input_body)
-app.add_page("ML Prediction Model Insights", page_predict_model_body)
-app.add_page("ML Cluster Model Insights", page_cluster_model_body)
+app.add_page("ML Classification Model Insights", page_predict_model_body)
+app.add_page("ML Borrower Clustering Insights", page_cluster_model_body)
 
 # Execute the app
 app.run()
