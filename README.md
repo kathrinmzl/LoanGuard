@@ -161,6 +161,21 @@ This segmentation helps the credit and retention teams tailor communication, pro
 - **Heuristics:** This clustering provides a systematic segmentation where previously none existed. The results can inform targeted risk interventions and product offerings.
 
 
+## User Stories
+I developed these user stories to clearly define the needs and goals of different stakeholders, ensuring that the project dashboard delivers actionable insights and functionality aligned with both business and technical objectives.
+
+1. As a non-technical stakeholder, I want to view a concise and structured overview of the project, including its goals, dataset, and business requirements, so that I can understand what the project aims to achieve and how to navigate the dashboard.
+
+2. As a data analyst, I want to explore correlations and key drivers of loan default through interactive data exploration and visualizations, so that I can identify which borrower and loan attributes most influence default risk and provide data-driven insights to the business.
+
+3. As a business analyst, I want to review the project’s main hypotheses about borrower behavior and validate them with visual and statistical evidence, so that I can understand which factors are meaningfully linked to default and ensure the findings are grounded in data.
+
+4. As a loan officer, I want to input borrower information and receive a predicted probability of default along with a borrower cluster assignment, so that I can make informed lending decisions and take appropriate risk mitigation actions based on the borrower’s risk profile.
+
+5. As a technical reviewer, I want to examine the predictive model’s structure, key features, and performance metrics, so that I can assess whether the model meets business requirements and delivers reliable and interpretable predictions.
+
+6. As a technical reviewer, I can view borrower clustering insights to evaluate the clustering model’s performance, understand cluster characteristics, and assess how effectively the clusters segment borrowers by default risk.
+
 ## Dashboard Design
 
 The dashboard will be developed in **Streamlit** and designed to guide the user from business understanding to actionable insights and model-based predictions.  
@@ -235,7 +250,7 @@ It will serve two main user groups:
 
 
 ## Unfixed Bugs
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+To this date, no known unfixed errors remain in the application, though, even after thorough testing, I cannot rule out the possibility.
 
 ## Deployment
 ### Heroku
