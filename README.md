@@ -16,14 +16,10 @@ The project was created for educational purposes only.
 
 [Live page on Heroku](https://loan-guard-c4aee35f5523.herokuapp.com/)
 
-![Application Mockup](docs/mockup.png) ???
-
-Source: [amiresponsive](https://ui.dev/amiresponsive?url=  TODO LINK!!) ???
-
 
 ## Dataset Content
 
-The used dataset is publicly available on [Kaggle](https://www.kaggle.com/datasets/laotse/credit-risk-dataset/data) and contains information about individual borrowers and their loan characteristics. Each row represents a loan record, including both personal and financial attributes that may influence the likelihood of default. The dataset provides a comprehensive overview of borrower profiles, such as age, income, home ownership or employment details, as well as loan-specific features like loan amount, interest rate and purpose.  
+The used dataset is publicly available on [Kaggle](https://www.kaggle.com/datasets/laotse/credit-risk-dataset) and contains information about individual borrowers and their loan characteristics. Each row represents a loan record, including both personal and financial attributes that may influence the likelihood of default. The dataset provides a comprehensive overview of borrower profiles, such as age, income, home ownership or employment details, as well as loan-specific features like loan amount, interest rate and purpose.  
 
 In total, the dataset includes **32,581 records and 12 variables**. The target variable, **`loan_status`**, indicates whether a borrower has defaulted on their loan (`1`) or successfully repaid it (`0`). The target distribution is **imbalanced toward non-default cases**, reflecting real-world lending scenarios where most borrowers do not default. This dataset enables predictive modeling to identify patterns and risk factors associated with loan default.
 
@@ -41,6 +37,16 @@ In total, the dataset includes **32,581 records and 12 variables**. The target v
 | `cb_person_default_on_file` | Whether the person has previously defaulted | Feature | object | Y, N |
 | `cb_person_cred_hist_length` | Length of credit history | Feature | int64 | Years |
 | `loan_status` | Loan default flag (target variable) | Target | int64 | 0 = No Default, 1 = Default |
+
+>**NOTE:**
+<br><br>
+When I initially started working on this project, I used a different dataset from [Kaggle](https://www.kaggle.com/datasets/nikhil1e9/loan-default). After attempting to build meaningful prediction and clustering models, I decided to switch to a new dataset.
+<br><br>
+The previous dataset was highly synthetic, with all variables being uniformly distributed and showing very little correlation—both between features and with the target variable. Uniform distributions are particularly challenging for predictive modeling and clustering because they lack natural variability and concentration of values. Consequently, there are few meaningful patterns, groupings, or relationships for the models to learn from.
+<br><br>
+As a result, it was very difficult to build a predictive model with good performance metrics and without overfitting. I experimented with several approaches to improve model performance and reduce overfitting, including hyperparameter tuning and binning numerical variables, but none led to satisfactory results. Furthermore, during the cluster analysis, the results did not correspond to any recognizable borrower groups or risk profiles, limiting the usefulness of the analysis.
+<br><br>
+Therefore, I decided to switch to the current dataset. Although it required more extensive data cleaning and transformation, it produced models with stronger performance and revealed meaningful, interpretable clusters. Overall, business interpretability and analytical insight were significantly improved.
 
 
 ## Project Terms & Jargon 
@@ -155,8 +161,7 @@ This segmentation helps the credit and retention teams tailor communication, pro
 - **Heuristics:** This clustering provides a systematic segmentation where previously none existed. The results can inform targeted risk interventions and product offerings.
 
 
-
-## Dashboard Design TODO Anpassen je nachdem was wirklich drin ist
+## Dashboard Design
 
 The dashboard will be developed in **Streamlit** and designed to guide the user from business understanding to actionable insights and model-based predictions.  
 It will consist of **six main pages**, each mapped to specific business requirements.
