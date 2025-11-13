@@ -106,7 +106,7 @@ def page_cluster_model_body():
         "- The score meets the defined success criterion (≥ 0.45), "
         "indicating a satisfactory level of cluster separation and "
         "cohesion.\n"
-        "* The number of clusters is low and clusters are well-defined "
+        "- The number of clusters is low and clusters are well-defined "
         "and distinct in their borrower profiles.\n\n"
         "**Business Insight:**\n"
         "* The segmentation supports targeted credit strategies — for "

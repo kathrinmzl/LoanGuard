@@ -49,9 +49,14 @@ def page_predict_input_body():
     # Page title and explanation
     st.title("Default Prediction Tool")
     st.info(
-        "This page implements Business Requirement 2: 'Develop a machine "
-        "learning model capable of predicting whether a loan applicant is "
-        "likely to default and segmenting borrowers into risk clusters.'\n\n"
+        "This page implements:\n"
+        "* **Business Requirement 2:** Develop a machine learning model "
+        "capable of predicting whether a loan applicant is likely to default. "
+        "The system should output a probability of default to support the "
+        "credit team in decision-making.\n"
+        "* **Business Requirement 3:** Group borrowers into risk-based "
+        "clusters to segment borrowers by credit behavior and improve "
+        "tailored intervention strategies.\n\n"
         "The system provides two outputs for a live borrower:\n"
         "1. A **probability of default** based on key inputs such as "
         "`loan_amnt`, `person_income`, and `loan_int_rate`.\n"

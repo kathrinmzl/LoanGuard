@@ -104,8 +104,8 @@ def page_summary_body():
         "4. **Default Prediction Tool** – Answers **BR 2: Predictive Model** "
         "and **BR 3: Clustering Model**. Input borrower info to get default "
         "predictions and assigned clusters.\n"
-        "5. **ML Prediction Model Insights** – Evaluate model metrics and "
+        "5. **ML Classification Model Insights** – Evaluate model metrics and "
         "feature importance.\n"
-        "6. **ML Clustering Model Insights** – Evaluate model metrics and "
+        "6. **ML Borrower Clustering Insights** – Evaluate model metrics and "
         "cluster profiles."
     )

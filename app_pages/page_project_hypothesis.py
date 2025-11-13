@@ -22,15 +22,15 @@ def page_project_hypothesis_body():
     This page helps link domain intuition with data-driven evidence.
     """
 
-    df = load_default_data(clean=True)
+    df = load_default_data(clean=True, drop_duplicates=True)
     target_var = "loan_status"
 
     # Page title and introduction
     st.title("Project Hypotheses & Validation")
     st.info(
         "To understand the factors influencing loan default risk, we "
-        "formulated four hypotheses grounded in domain knowledge and "
-        "observed patterns. Each hypothesis focuses on a feature expected "
+        "formulated four hypotheses grounded in domain knowledge. "
+        "Each hypothesis focuses on a feature expected "
         "to affect default probability.\n\n"
         "We validate them using data distributions and statistical "
         "significance tests (Mann–Whitney U or Chi-Square), confirming "
