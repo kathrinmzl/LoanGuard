@@ -249,6 +249,86 @@ It will serve two main user groups:
   - Description of cluster profiles and business use of segmentation
 
 
+## Main Data Analysis and Machine Learning Libraries /Technologies Used -> see cvd project
+* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
+
+## Testing
+
+### User Story Testing
+Each page of the dashboard corresponds to a specific user story, ensuring that the application meets the needs of both non-technical and technical users. The dashboard was manually tested using these user stories as a basis for determining success.  
+
+For the Jupyter notebooks, manual testing against user stories was deemed irrelevant, as their execution relies on consecutive functions being successful. Instead, correctness was ensured through code validation and sequential function execution.
+
+#### User Story 1: Project Summary Page
+*As a non-technical stakeholder, I want to view a concise and structured overview of the project, including its goals, dataset, and business requirements, so that I can understand what the project aims to achieve and how to navigate the dashboard.*
+
+| Feature | Action | Expected Result | Test Result |
+| --- | --- | --- | --- |
+| Project Summary Page | Navigate to summary page | Page is displayed with all sections visible; user can read overview, terms, dataset, and business requirements. | Pass |
+
+---
+
+#### User Story 2: Loan Default Study Page
+*As a data analyst, I want to explore correlations and key drivers of loan default through interactive data exploration and visualizations, so that I can identify which borrower and loan attributes most influence default risk and provide data-driven insights to the business.*
+
+| Feature | Action | Expected Result | Test Result |
+| --- | --- | --- | --- |
+| Loan Default Study Page | Navigate to page | Page loads correctly; correlation and feature distributions sections are displayed. | Pass |
+| Data Inspection | Tick checkbox to inspect dataset | Table shows number of rows, columns, and first 10 rows. | Pass |
+| PPS Heatmap | Tick checkbox to show heatmap | PPS heatmap is displayed with relevant scores. | Pass |
+| Feature Distributions | Tick checkbox to show distributions | Visualizations for key features are displayed by default level. | Pass |
+| Parallel Plot | Tick checkbox to show parallel plot | Parallel plot displays interactions between features and default probability. | Pass |
+
+---
+
+#### User Story 3: Project Hypotheses Page
+*As a business analyst, I want to review the project’s main hypotheses about borrower behavior and validate them with visual and statistical evidence, so that I can understand which factors are meaningfully linked to default and ensure the findings are grounded in data.*
+
+| Feature | Action | Expected Result | Test Result |
+| --- | --- | --- | --- |
+| Project Hypotheses Page | Navigate to page | Page displays all four hypotheses with introductory text. | Pass |
+| Hypothesis Validation | Tick checkbox for each hypothesis | Corresponding distribution plot is displayed along with statistical test result. | Pass |
+| Validation Summary | Read page | Written conclusion confirms whether each hypothesis is supported by data. | Pass |
+
+---
+
+#### User Story 4: Default Prediction Tool Page
+*As a loan officer, I want to input borrower information and receive a predicted probability of default along with a borrower cluster assignment, so that I can make informed lending decisions and take appropriate risk mitigation actions based on the borrower’s risk profile.*
+
+| Feature | Action | Expected Result | Test Result |
+| --- | --- | --- | --- |
+| Default Prediction Tool Page | Navigate to page | Page displays explanation of BR2 & BR3, and input widgets are visible. | Pass |
+| Input Widgets | Enter unseen borrower data | Widgets respond to input correctly. | Pass |
+| Run Predictive Analysis | Click “Run Predictive Analysis” | Predicted default probability, cluster assignment, cluster profile, and business recommendation are displayed. | Pass |
+
+---
+
+#### User Story 5: Classification Model Insights Page
+*As a technical reviewer, I want to examine the predictive model’s structure, key features, and performance metrics, so that I can assess whether the model meets business requirements and delivers reliable and interpretable predictions.*
+
+| Feature | Action | Expected Result | Test Result |
+| --- | --- | --- | --- |
+| Classification Model Insights Page | Navigate to page | Page loads with model overview, ML pipelines, and feature importance visualizations. | Pass |
+| Model Metrics | View confusion matrices and classification reports | Train and test set performance metrics are displayed; insights are interpretable by a technical reviewer. | Pass |
+
+---
+
+#### User Story 6: Borrower Clustering Insights Page
+*As a technical reviewer, I can view borrower clustering insights to evaluate the clustering model’s performance, understand cluster characteristics, and assess how effectively the clusters segment borrowers by default risk.*
+
+| Feature | Action | Expected Result | Test Result |
+| --- | --- | --- | --- |
+| Borrower Clustering Insights Page | Navigate to page | Page loads with cluster analysis overview, ML pipeline description, and top feature visualizations. | Pass |
+| Cluster Performance Metrics | View silhouette plot and average score | Silhouette plot and score are displayed; number of clusters is indicated. | Pass |
+| Cluster Distribution | Analyze default levels by cluster | Correct distribution of borrowers across clusters is shown. | Pass |
+| Cluster Profiles | Examine cluster characteristics | Cluster descriptions and business relevance are displayed; technical reviewer can interpret segmentation. | Pass |
+
+
+### Code Validation
+All python code within the `app_pages`and `src` directories as well as the `app.py` file has been validated for PEP8 compliance using Code Institute’s [PEP8 Linter](https://pep8ci.herokuapp.com/). No issues remain.
+
+All code within the `.ipynb` files in `jupyter_notebooks` directory has been checked not to exceed 79 characters per line.
+
 ## Unfixed Bugs
 To this date, no known unfixed errors remain in the application, though, even after thorough testing, I cannot rule out the possibility.
 
@@ -266,9 +346,6 @@ To this date, no known unfixed errors remain in the application, though, even af
 5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
 6. If the slug size is too large then add large files not required for the app to the .slugignore file.
 
-
-## Main Data Analysis and Machine Learning Libraries
-* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
 
 
 ## Credits 
