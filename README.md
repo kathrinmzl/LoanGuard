@@ -248,9 +248,46 @@ It will serve two main user groups:
   - Visualization of the top features defining the clusters
   - Description of cluster profiles and business use of segmentation
 
+## Technologies Used
 
-## Main Data Analysis and Machine Learning Libraries /Technologies Used -> see cvd project
-* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
+The technologies used throughout the development are listed below.
+
+### Languages
+
+* [Python](https://www.python.org/)
+
+### Python Packages
+
+#### Main Data Analysis & Machine Learning Libraries
+* [Pandas](https://pandas.pydata.org/docs/index.html) - Open source library for data manipulation and analysis.
+* [NumPy](https://numpy.org/doc/stable/) - Adds support for large, multi-dimensional arrays and high-level mathematical functions.
+* [Matplotlib](https://matplotlib.org/) - Comprehensive library for creating static, animated, and interactive visualisations.
+* [Seaborn](https://seaborn.pydata.org/) - Statistical data visualisation library for attractive and informative graphics.
+* [Plotly Express](https://plotly.com/python/plotly-express/) - High-level library for creating interactive plots easily.
+* [scikit-learn](https://scikit-learn.org/stable/) - Open source machine learning library featuring classification, regression, and clustering.
+* [Feature-engine](https://feature-engine.trainindata.com/en/latest/) - Library with multiple transformers to engineer and select features for ML models.
+* [ppscore](https://pypi.org/project/ppscore/) - Library for detecting linear or non-linear relationships between two features.
+* [SciPy](https://scipy.org/) - Library for scientific computing, including statistical tests.
+* [XGBoost](https://xgboost.readthedocs.io/en/stable/) - High-performance gradient boosting library.
+* [CatBoost](https://catboost.ai/) - Gradient boosting library optimized for categorical features.
+* [imbalanced-learn](https://imbalanced-learn.org/stable/) - Tools for handling imbalanced datasets in classification tasks.
+* [Yellowbrick](https://www.scikit-yb.org/en/latest/) - Visual analysis and diagnostic tools for machine learning models.
+* [Joblib](https://joblib.readthedocs.io/en/stable/) - Utilities for pipelining, caching, and saving/loading models.
+* [YData Profiling](https://docs.profiling.ydata.ai/latest/) - Automated exploratory data analysis and profiling reports.
+
+#### Utilities
+* [Warnings](https://docs.python.org/3/library/warnings.html) - Suppress or manage warnings in Python.
+* [Streamlit](https://docs.streamlit.io/) - Framework for building interactive dashboards and web applications.
+* [Glob](https://docs.python.org/3/library/glob.html) - File pathname pattern matching.
+* [Zipfile](https://docs.python.org/3/library/zipfile.html) - Work with ZIP archives in Python.
+
+
+### Other Technologies
+
+* [Git](https://git-scm.com/) - For version control
+* [GitHub](https://github.com/) - Code repository
+* [Heroku](https://heroku.com) - For application deployment
+* [VSCode](https://code.visualstudio.com/) - IDE used for development
 
 ## Testing
 
@@ -335,17 +372,59 @@ To this date, no known unfixed errors remain in the application, though, even af
 ## Deployment
 ### Heroku
 
-* The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
-* Set the runtime.txt Python version to a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
-* The project was deployed to Heroku using the following steps.
+The App live link is: https://loan-guard-c4aee35f5523.herokuapp.com/ 
 
-1. Log in to Heroku and create an App
-2. At the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
-6. If the slug size is too large then add large files not required for the app to the .slugignore file.
+The project was deployed to Heroku using the following steps:
 
+1. Within your working directory, ensure there is a ``setup.sh`` file containing the following:
+```
+mkdir -p ~/.streamlit/
+echo "\
+[server]\n\
+headless = true\n\
+port = $PORT\n\
+enableCORS = false\n\
+\n\
+" > ~/.streamlit/config.toml
+```
+2. Within your working directory, ensure there is a ``.python-version`` file containing a [Heroku-24](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack supported version of Python.
+```
+3.12
+```
+3. Within your working directory, ensure there is a ``Procfile`` file containing the following:
+```
+web: sh setup.sh && streamlit run app.py
+```
+4. Ensure your ``requirements.txt`` file contains all the packages necessary to run the streamlit dashboard.
+5. Update your ``.gitignore`` and ``.slugignore`` files with any files/directories that you do not want uploading to GitHub or are unnecessary for deployment.
+6. Log in to [Heroku](https://id.heroku.com/login) or create an account if you do not already have one.
+7. Click the **New** button on the dashboard and from the dropdown menu select "Create new app".
+8. Enter a suitable app name and select your region, then click the **Create app** button.
+9. Once the app has been created, navigate to the Deploy tab.
+10. At the Deploy tab, in the Deployment method section select **GitHub**.
+11. Enter your repository name and click **Search**. Once it is found, click **Connect**.
+12. Navigate to the bottom of the Deploy page to the Manual deploy section and select main from the branch dropdown menu.
+13. Click the **Deploy Branch** button to begin deployment.
+14. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
+15. If the build fails, check the build log carefully to troubleshoot what went wrong. If the slug size is too large then add large files not required for the app to the ``.slugignore`` file.
+
+## Forking and Cloning
+If you wish to fork or clone this repository, please follow the instructions below:
+
+### Forking
+1. In the top right of the main repository page, click the **Fork** button.
+2. Under **Owner**, select the desired owner from the dropdown menu.
+3. **OPTIONAL:** Change the default name of the repository in order to distinguish it.
+4. **OPTIONAL:** In the **Description** field, enter a description for the forked repository.
+5. Ensure the 'Copy the main branch only' checkbox is selected.
+6. Click the **Create fork** button.
+
+### Cloning
+1. On the main repository page, click the **Code** button.
+2. Copy the HTTPS URL from the resulting dropdown menu.
+3. In your IDE terminal, navigate to the directory you want the cloned repository to be created.
+4. In your IDE terminal, type ```git clone``` and paste the copied URL.
+5. Hit Enter to create the cloned repository.
 
 
 ## Credits 
