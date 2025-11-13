@@ -135,7 +135,6 @@ In addition to the binary outcome, the model provides a **probability of default
   - Probability of default (e.g., 0.76 = 76% chance of default) to guide credit risk decisions.  
 - **Heuristics:** Traditionally, financial institutions rely on fixed credit scores or manual reviews to assess loan risk. The model should be used to prioritize risk review and support decision-making (not to fully automate rejections). Thresholds for action should be determined in consultation with the credit risk team to balance loss prevention and borrower impact.
  
-
 #### **Clustering Model — Borrower Segmentation**
 
 We implemented an **unsupervised** clustering model to group borrowers with similar credit and loan characteristics.  
@@ -175,6 +174,7 @@ I developed these user stories to clearly define the needs and goals of differen
 5. As a technical reviewer, I want to examine the predictive model’s structure, key features, and performance metrics, so that I can assess whether the model meets business requirements and delivers reliable and interpretable predictions.
 
 6. As a technical reviewer, I can view borrower clustering insights to evaluate the clustering model’s performance, understand cluster characteristics, and assess how effectively the clusters segment borrowers by default risk.
+
 
 ## Dashboard Design
 
@@ -248,6 +248,7 @@ It will serve two main user groups:
   - Visualization of the top features defining the clusters
   - Description of cluster profiles and business use of segmentation
 
+
 ## Technologies Used
 
 The technologies used throughout the development are listed below.
@@ -281,13 +282,13 @@ The technologies used throughout the development are listed below.
 * [Glob](https://docs.python.org/3/library/glob.html) - File pathname pattern matching.
 * [Zipfile](https://docs.python.org/3/library/zipfile.html) - Work with ZIP archives in Python.
 
-
 ### Other Technologies
 
 * [Git](https://git-scm.com/) - For version control
 * [GitHub](https://github.com/) - Code repository
 * [Heroku](https://heroku.com) - For application deployment
 * [VSCode](https://code.visualstudio.com/) - IDE used for development
+
 
 ## Testing
 
@@ -360,14 +361,15 @@ For the Jupyter notebooks, manual testing against user stories was deemed irrele
 | Cluster Distribution | Analyze default levels by cluster | Correct distribution of borrowers across clusters is shown. | Pass |
 | Cluster Profiles | Examine cluster characteristics | Cluster descriptions and business relevance are displayed; technical reviewer can interpret segmentation. | Pass |
 
-
 ### Code Validation
 All python code within the `app_pages`and `src` directories as well as the `app.py` file has been validated for PEP8 compliance using Code Institute’s [PEP8 Linter](https://pep8ci.herokuapp.com/). No issues remain.
 
 All code within the `.ipynb` files in `jupyter_notebooks` directory has been checked not to exceed 79 characters per line.
 
+
 ## Unfixed Bugs
 To this date, no known unfixed errors remain in the application, though, even after thorough testing, I cannot rule out the possibility.
+
 
 ## Deployment
 ### Heroku
@@ -408,6 +410,7 @@ web: sh setup.sh && streamlit run app.py
 14. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
 15. If the build fails, check the build log carefully to troubleshoot what went wrong. If the slug size is too large then add large files not required for the app to the ``.slugignore`` file.
 
+
 ## Forking and Cloning
 If you wish to fork or clone this repository, please follow the instructions below:
 
@@ -429,22 +432,18 @@ If you wish to fork or clone this repository, please follow the instructions bel
 
 ## Credits 
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
+This project has been based on the methodologies used in the [Churnometer](https://github.com/Code-Institute-Solutions/churnometer) project 
+from Code Institute. Some functions from that project have been used in their 
+original form, while others have been customized for the purposes of this project. 
+The main functions that have been used:
 
-### Content 
-
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign-Up page were taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
-
-### Media
-
-- The photos used on the home and sign-up page are from This Open-Source site
-- The images used for the gallery page were taken from this other open-source site
-
-
-
-## Acknowledgements (optional)
-* Thank the people who provided support through this project.
-
+* Functions for calculating correlations and displaying correlation heatmaps.  
+* Customized function for testing different numerical transformations to evaluate 
+  improvement in distribution shape.  
+* Function for performing hyperparameter optimization using grid search, adapted 
+  to also perform randomized search.  
+* Function to display confusion matrix and classification performance report.  
+* Cluster analysis utilities:  
+  - Visualization of PCA results, elbow and silhouette plots.  
+  - Cluster distribution plots.  
+  - Function to describe cluster profiles.
