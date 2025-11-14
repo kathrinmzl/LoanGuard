@@ -122,6 +122,17 @@ def page_project_hypothesis_body():
         plot_numerical(df, "person_emp_length", target_var)
         run_mannwhitneyu(df, "person_emp_length", target_var, "lower")
 
+    # Conclusions
+    st.write("## Conclusions")
+    st.success(
+        "All tested hypotheses were confirmed, showing the following:\n\n"
+        "- **Domain intuition is supported:** Patterns expected from "
+        "financial reasoning are present.\n"
+        "- **Features are predictive:** `person_emp_length`, `loan_amnt`, "
+        "`person_income`, and `loan_grade` show links to default risk, "
+        "making them valuable inputs for predictive models."
+    )
+
 
 # --- Helper Functions --- #
 def run_mannwhitneyu(df, col, target_var, direction):
