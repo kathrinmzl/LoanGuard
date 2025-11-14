@@ -66,10 +66,10 @@ def page_cluster_model_body():
     st.image(features_to_cluster)
     st.info(
         "The feature importance plot shows that **home ownership** and "
-        "**previous default history** contribute the most to the model’s "
-        "predictions, each with almost 50% importance. **Income** only adds "
+        "**previous default history** contribute the most to the cluster "
+        "assignments, each with almost 50% importance. **Income** only adds "
         "marginally, about 3%, indicating a much smaller influence on "
-        "default prediction."
+        "cluster assignment."
     )
 
     st.write("## Model Performance")
@@ -91,7 +91,7 @@ def page_cluster_model_body():
         "risk levels across clusters."
     )
 
-    # Updated business interpretation based on new clusters
+    # Cluster Profiles
     st.write("## Cluster Profile")
     st.info(
         "* Cluster 0: Borrowers with previous defaults, mostly renters, "
@@ -101,16 +101,17 @@ def page_cluster_model_body():
         "* Cluster 2: Borrowers with mortgages, higher incomes, no default "
         "history, lowest default rate (low-risk segment)."
     )
+
+    # Show cluster profile table
+    cluster_profile.index = [" "] * len(cluster_profile)
+    st.table(cluster_profile)
+
     st.warning(
         "* The cluster profile allows the credit team to identify risk "
         "characteristics beyond the predicted probability of default.\n"
         "* Potential actions: higher scrutiny for Cluster 0, cautious "
         "lending for Cluster 1, standard approval for Cluster 2."
     )
-
-    # Show cluster profile table
-    cluster_profile.index = [" "] * len(cluster_profile)
-    st.table(cluster_profile)
 
     # Interpretation and business insights
     st.write("## Interpretation & Business Relevance")
