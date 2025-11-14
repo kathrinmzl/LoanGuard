@@ -108,12 +108,14 @@ def page_loan_default_study_body():
 
     # Summary of general trends
     st.success(
-        "Borrowers who default tend to show the following trends:\n"
+        "The graphics show that "
+        "borrowers who default tend to show the following trends:\n"
         "* Pay rent\n* Have higher interest rates\n"
         "* Higher loan amount relative to income\n\n"
         "Not all defaulting borrowers have all patterns simultaneously; these "
         "factors influence default probability.\n\n"
-        "NOTE: Interest rates are strongly correlated with the loan grade. "
+        "NOTE: As you could see in the PPS Heatmap, "
+        "interest rates are strongly correlated with the loan grade. "
         "From a business perspective, having a lower/worse loan grade "
         "implies, that a borrower will have worse loan terms including higher "
         "interest rates. Therefore, having a higher interest rate directly"
@@ -130,8 +132,13 @@ def page_loan_default_study_body():
         st.write("* Green indicates the profile of defaulted borrowers.")
         parallel_plot_default(df_eda)
         st.success(
-            "The plot highlights interactions of key borrower and loan "
-            "attributes with their default status."
+            "The parallel categories plot shows the same general patterns "
+            "observed in the previous section, but now combined in a single "
+            "visualization. It highlights how the key borrower and loan "
+            "attributes interact with each other and with default status. "
+            "We can see that higher loan amounts relative to income, higher "
+            "interest rates, and paying rent tend to be associated with "
+            "increased default probability."
         )
 
 

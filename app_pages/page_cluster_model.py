@@ -64,6 +64,13 @@ def page_cluster_model_body():
     st.write("The clusters were defined using the following features:")
     st.write(cluster_features)
     st.image(features_to_cluster)
+    st.info(
+        "The feature importance plot shows that **home ownership** and "
+        "**previous default history** contribute the most to the model’s "
+        "predictions, each with almost 50% importance. **Income** only adds "
+        "marginally, about 3%, indicating a much smaller influence on "
+        "default prediction."
+    )
 
     st.write("## Model Performance")
     st.write("### Clusters Silhouette Plot")
@@ -75,6 +82,13 @@ def page_cluster_model_body():
 
     cluster_distribution_per_variable(
         df=df_cluster_vs_default, target='loan_status'
+    )
+    st.info(
+        "The cluster distribution plots show that **Cluster 1** contains the "
+        "largest share of borrowers, followed by **Cluster 2** and "
+        "**Cluster 0**. However, the percentage of defaults is highest in "
+        "Cluster 0, then 1, and lowest in Cluster 2, highlighting varying "
+        "risk levels across clusters."
     )
 
     # Updated business interpretation based on new clusters

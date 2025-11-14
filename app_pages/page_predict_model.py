@@ -71,6 +71,12 @@ def page_predict_model_body():
     st.write("The model was trained using the following features:")
     st.write(X_train.columns.to_list())
     st.image(default_feat_importance)
+    st.info(
+        "The feature importance plot shows that **income** has the highest "
+        "importance (46%) and therefore explains most of "
+        "the model’s predictive power, followed by **interest rate** (39%) "
+        "and **loan amount** (15%)."
+    )
 
     # Model evaluation
     st.write("## Model Performance")
@@ -82,25 +88,28 @@ def page_predict_model_body():
     )
 
     # Interpretation and business insights
-    st.write("## Interpretation & Business Relevance")
+    st.write("## Model Performance Interpretation & Business Relevance")
     st.success(
         "**Performance Summary:**\n\n"
         "- **Train Set (Default class):** Recall = 0.80, F1 = 0.80 ✅\n"
         "- **Test Set (Default class):** Recall = 0.78, F1 = 0.62 ✅\n\n"
         "Both metrics meet the defined success criteria.\n\n"
-        "**Observations:**\n"
-        "* Recall remains high across both datasets, ensuring most high-risk "
-        "borrowers are detected.\n"
-        "* The F1 score shows a moderate drop from train to test "
-        "(0.80 → 0.62), mainly driven by lower precision on unseen data.\n"
-        "* This drop is expected and does not indicate severe overfitting, "
-        "as recall remains stable and well above the threshold.\n\n"
+        "**Confusion Matrix Observations:**\n"
+        "* **Train Set:** True positives and true negatives are reliably "
+        "assigned.\n"
+        "* **Test Set:** Relative amount of false negatives is higher, "
+        "showing slight performance drop on unseen data.\n"
+        "* Despite this, recall remains above the threshold, ensuring "
+        "high-risk borrowers are still captured.\n\n"
+        "**Additional Observations:**\n"
+        "* F1 score drops moderately (0.80 → 0.62) due to lower precision on "
+        "the test set.\n"
+        "* This is expected and does not indicate severe overfitting.\n\n"
         "**Business Insight:**\n"
-        "* The model effectively prioritizes recall, supporting the goal of "
-        "minimizing missed defaulters.\n"
-        "* The precision trade-off is acceptable for credit risk management, "
-        "where capturing high-risk applicants is more important than "
-        "occasional false positives.\n"
-        "* Overall, the pipeline meets business performance requirements and "
-        "provides reliable support for credit risk decision-making."
-    )
+        "* Prioritizing recall aligns with the goal of minimizing missed "
+        "defaulters.\n"
+        "* Slight precision trade-off is acceptable in credit risk "
+        "management.\n"
+        "* Overall, the pipeline meets business requirements and supports "
+        "credit risk decisions effectively."
+        )
