@@ -36,17 +36,17 @@ In total, the dataset includes **32,581 records and 12 variables**. The target v
 | `loan_percent_income` | Loan amount as a percentage of annual income | Feature | float64 | Ratio |
 | `cb_person_default_on_file` | Whether the person has previously defaulted | Feature | object | Y, N |
 | `cb_person_cred_hist_length` | Length of credit history | Feature | int64 | Years |
-| `loan_status` | Loan default flag (target variable) | Target | int64 | 0 = No Default, 1 = Default |
+| `loan_status` | Loan default flag | Target | int64 | 0 = No Default, 1 = Default |
 
 >**NOTE:**
 <br><br>
 When I initially started working on this project, I used a different dataset from [Kaggle](https://www.kaggle.com/datasets/nikhil1e9/loan-default). After attempting to build meaningful prediction and clustering models, I decided to switch to a new dataset.
 <br><br>
-The previous dataset was highly synthetic, with all variables being uniformly distributed and showing very little correlation—both between features and with the target variable. Uniform distributions are particularly challenging for predictive modeling and clustering because they lack natural variability and concentration of values. Consequently, there are few meaningful patterns, groupings, or relationships for the models to learn from.
+The previous dataset was highly synthetic, with all variables being uniformly distributed and showing very little correlation - both between features and with the target variable. Uniform distributions are particularly challenging for predictive modeling and clustering because they lack natural variability and concentration of values. Consequently, there are few meaningful patterns, groupings, or relationships for the models to learn from.
 <br><br>
 As a result, it was very difficult to build a predictive model with good performance metrics and without overfitting. I experimented with several approaches to improve model performance and reduce overfitting, including hyperparameter tuning and binning numerical variables, but none led to satisfactory results. Furthermore, during the cluster analysis, the results did not correspond to any recognizable borrower groups or risk profiles, limiting the usefulness of the analysis.
 <br><br>
-Therefore, I decided to switch to the current dataset. Although it required more extensive data cleaning and transformation, it produced models with stronger performance and revealed meaningful, interpretable clusters. Overall, business interpretability and analytical insight were significantly improved.
+Therefore, I decided to switch to the current dataset. Although it required more extensive data cleaning and transformation, it produces models with stronger performance and revealed meaningful, interpretable clusters. Overall, business interpretability and analytical insight were significantly improved.
 
 
 ## Project Terms & Jargon 
@@ -59,13 +59,10 @@ Therefore, I decided to switch to the current dataset. Although it required more
 ## Business Requirements
 From a business perspective, this project supports the strategic goals of a financial institution such as:
 
-- Improving risk management by identifying high-risk applicants early.
-
- - Enhancing profitability through optimized loan approval decisions.
-
+- Improving risk management by identifying high-risk applicants early. 
+- Enhancing profitability through optimized loan approval decisions.
 - Increasing borrower trust and operational efficiency by offering fair, data-driven credit evaluations.
-
- - Enabling personalized loan offerings and proactive interventions for at-risk borrowers (e.g., adjusted payment plans or counseling).
+- Enabling personalized loan offerings and proactive interventions for at-risk borrowers (e.g., adjusted payment plans or counseling).
 
 Ultimately, this project aligns predictive analytics with the bank’s long-term objective of balancing growth with financial stability.
 
@@ -75,7 +72,7 @@ To achieve the outlined objectives, the project will focus on the following key 
 - Identify key borrower and loan attributes that are most correlated with loan default.
 Provide visual and statistical insights to help business analysts understand the primary drivers of credit risk.
 
-**Business Requirement 2: Predictive Model (Machine Learning)**
+**Business Requirement 2: Classification Model (Machine Learning)**
 - Develop a machine learning model capable of predicting whether a loan applicant is likely to default. The system should output a probability of default to support the credit team in decision-making.
 
 **Business Requirement 3: Clustering Model (Machine Learning)**
@@ -83,7 +80,7 @@ Provide visual and statistical insights to help business analysts understand the
 
 
 ## Hypotheses and how to validate them?
-To better understand the factors influencing loan default risk, we formulated four key hypotheses based on domain knowledge and the available data. Each hypothesis focuses on a variable expected to impact default probability.
+To better understand the factors influencing loan default risk, I formulated four key hypotheses based on domain knowledge and the available data. Each hypothesis focuses on a variable expected to impact default probability.
 
 | Hypothesis | Rationale | Validation |
 |------------|------------|-------------|
@@ -102,7 +99,7 @@ This section explains how each business requirement is addressed by specific ana
 - Provide visual and statistical insights to help business analysts understand the primary drivers of credit risk.
 - Visualize distributions and relationships between key features and the target variable.
 
-**Business Requirement 2: Predictive Model (Machine Learning)**
+**Business Requirement 2: Classification Model (Machine Learning)**
 - Develop a **binary classification model** to predict whether a loan applicant is likely to default.
 - Show the **probability of default** to support the credit team in decision-making.
 - Evaluate model performance and feature importance for transparency and reliability.
@@ -118,22 +115,22 @@ This section explains how each business requirement is addressed by specific ana
 #### **Binary Classification Model — Loan Default Prediction**
 
 We aim to develop a **supervised** machine learning model that predicts whether a loan applicant will default or not.  
-In addition to the binary outcome, the model provides a **probability of default** to support the credit risk team in decision-making.
+The model should provide a **probability of default** to support the credit risk team in decision-making.
 
 - **Goal:** Predict if a borrower will default on their loan (`loan_status`) and provide the associated probability of default.  
-- **Model type:** Supervised — Binary Classification.  
+- **Model type:** Supervised - Binary Classification.  
 - **Input features:** Borrower demographic and financial attributes 
 - **Model choice:** After experimentation, a **Random Forest** model was chosen as the best-performing and most interpretable model.  
 - **Success metrics (on both training and test sets):**  
   - Recall for default ≥ 0.75 – to minimize false negatives (high-risk borrowers predicted as safe)  
-  - F1 score ≥ 0.60 – ensures a balance between recall and precision  
+  - F1 score for default ≥ 0.60 – ensures a balance between recall and precision  
 - **Failure conditions:**  
   - Strong degradation of performance on test data vs. train data → indicates overfitting.  
   - Large imbalance between precision and recall → predictions may not be reliable for business decisions.  
 - **Output definition:**  
   - Binary prediction (`0` = no default, `1` = default).  
   - Probability of default (e.g., 0.76 = 76% chance of default) to guide credit risk decisions.  
-- **Heuristics:** Traditionally, financial institutions rely on fixed credit scores or manual reviews to assess loan risk. The model should be used to prioritize risk review and support decision-making (not to fully automate rejections). Thresholds for action should be determined in consultation with the credit risk team to balance loss prevention and borrower impact.
+- **Heuristics:** The model should be used to prioritize risk review and support decision-making (not to fully automate rejections). Thresholds for action should be determined in consultation with the credit risk team to balance loss prevention and borrower impact.
  
 #### **Clustering Model — Borrower Segmentation**
 
@@ -141,7 +138,7 @@ We implemented an **unsupervised** clustering model to group borrowers with simi
 This segmentation helps the credit and retention teams tailor communication, product offerings, and risk mitigation strategies.
 
 - **Goal:** Identify distinct borrower segments based on credit behavior and financial characteristics.  
-- **Model type:** Unsupervised — Clustering.  
+- **Model type:** Unsupervised - Clustering.  
 - **Input features:** Borrower demographic and financial attributes 
 - **Model choice:** **K-Means**
 - **Success metrics:**  
@@ -152,8 +149,8 @@ This segmentation helps the credit and retention teams tailor communication, pro
   - Clusters are not meaningfully distinct (overlapping feature distributions).  
 - **Output definition:**  
   - Cluster assignments appended to the dataset as an additional categorical column (`Clusters`).  
-  - Each borrower belongs to one cluster (0, 1, or 2).  
-  - Cluster characteristics:  
+  - Each borrower belongs to one cluster.  
+  - Identified cluster characteristics:  
     - **Cluster 0:** Borrowers with a history of previous defaults, mostly renters, moderate income, highest default rate (high-risk).  
     - **Cluster 1:** Borrowers with no history of previous defaults, who mostly rent, lower to mid-range incomes, moderate default rates (middle-risk).  
     - **Cluster 2:** Borrowers with no history of previous defaults, who primarily have mortgages, higher incomes, rarely default (low-risk).  
@@ -161,7 +158,7 @@ This segmentation helps the credit and retention teams tailor communication, pro
 
 
 ## User Stories
-I developed these user stories to clearly define the needs and goals of different stakeholders, ensuring that the project dashboard delivers actionable insights and functionality aligned with both business and technical objectives.
+I developed user stories to clearly define the needs and goals of different stakeholders, ensuring that the project dashboard delivers actionable insights and functionality aligned with both business and technical objectives.
 
 1. As a non-technical stakeholder, I want to view a concise and structured overview of the project, including its goals, dataset, and business requirements, so that I can understand what the project aims to achieve and how to navigate the dashboard.
 
@@ -169,7 +166,7 @@ I developed these user stories to clearly define the needs and goals of differen
 
 3. As a business analyst, I want to review the project’s main hypotheses about borrower behavior and validate them with visual and statistical evidence, so that I can understand which factors are meaningfully linked to default and ensure the findings are grounded in data.
 
-4. As a loan officer, I want to input borrower information and receive a predicted probability of default along with a borrower cluster assignment, so that I can make informed lending decisions and take appropriate risk mitigation actions based on the borrower’s risk profile.
+4. As a loan officer, I want to input borrower information and receive a predicted probability of default along with a borrower cluster assignment, so that I can make informed lending decisions and take appropriate risk mitigation actions based on the borrower’s profile.
 
 5. As a technical reviewer, I want to examine the predictive model’s structure, key features, and performance metrics, so that I can assess whether the model meets business requirements and delivers reliable and interpretable predictions.
 
@@ -181,7 +178,7 @@ I developed these user stories to clearly define the needs and goals of differen
 The dashboard will be developed in **Streamlit** and designed to guide the user from business understanding to actionable insights and model-based predictions.  
 It will consist of **six main pages**, each mapped to specific business requirements.
 
-The goal of the dashboard is to provide both **descriptive insights** and **predictive intelligence** to support data-driven decisions in **loan management and credit risk assessment**.  
+The goal of the dashboard is to provide both **descriptive insights** and **predictive intelligence** to support data-driven decisions in **loan management**.  
 It will serve two main user groups:  
 - **Business analysts:** who need to explore patterns and trends in borrower data.  
 - **Credit officers:** who need actionable information on loan risk and applicant default probability.
@@ -216,19 +213,19 @@ It will serve two main user groups:
     - Checkbox: Display corresponding distribution plot for each hypothesis and result of statistical test 
 
 ### **Page 4: Default Prediction Tool**
-- **Purpose:** Address **Business Requirement 2 (Predictive Model)** and **Business Requirement 3: Clustering Model**
+- **Purpose:** Address **Business Requirement 2 (Classification Model)** and **Business Requirement 3 (Clustering Model)**
 - **Sections:**
-  - State Business Requirement 2 and 3 
+  - State Business Requirements 2 and 3 
   - Widget input fields for necessary borrower data  
   - “Run Predictive Analysis” button to send input data through the trained ML pipelines  
   - Output:  
-    - Predicted default probability (e.g., 73%)  
+    - Predicted default probability
     - Cluster assignment for additional context  
     - Cluster profile summary 
     - Combined business recommendation based on default probability and cluster  
 
 ### **Page 5: Classification Model Insights**
-- **Purpose:** Address **Business Requirement 2 (Predictive Model)**. Show predictive model performance and interpretation. 
+- **Purpose:** Address **Business Requirement 2 (Classification Model)**. Show predictive model performance and interpretation. 
 - **Sections:**
   - Describe model objective
   - Overview of used ML pipelines
@@ -242,7 +239,7 @@ It will serve two main user groups:
 - **Sections:**
   - Describe model objective
   - Overview of used ML pipeline
-  - Insights into model performance
+  - Insights into cluster analysis performance
     - Silhouette plot, average silhouette score and number of clusters chosen 
   - Cluster distribution across default levels 
   - Visualization of the top features defining the clusters
@@ -364,7 +361,7 @@ For the Jupyter notebooks, manual testing against user stories was deemed irrele
 ### Code Validation
 All python code within the `app_pages`and `src` directories as well as the `app.py` file has been validated for PEP8 compliance using Code Institute’s [PEP8 Linter](https://pep8ci.herokuapp.com/). No issues remain.
 
-All code within the `.ipynb` files in `jupyter_notebooks` directory has been checked not to exceed 79 characters per line.
+All code within the `.ipynb` files in `jupyter_notebooks` directory has primarily been checked not to exceed 79 characters per line. Some whitespaces remain.
 
 
 ## Unfixed Bugs
@@ -398,7 +395,10 @@ enableCORS = false\n\
 web: sh setup.sh && streamlit run app.py
 ```
 4. Ensure your ``requirements.txt`` file contains all the packages necessary to run the streamlit dashboard.
-5. Update your ``.gitignore`` and ``.slugignore`` files with any files/directories that you do not want uploading to GitHub or are unnecessary for deployment.
+5. Ensure your ``.slugignore`` file contains all  files/directories that are unnecessary for deployment.
+```
+*.ipynb
+```
 6. Log in to [Heroku](https://id.heroku.com/login) or create an account if you do not already have one.
 7. Click the **New** button on the dashboard and from the dropdown menu select "Create new app".
 8. Enter a suitable app name and select your region, then click the **Create app** button.
