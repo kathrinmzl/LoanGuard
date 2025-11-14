@@ -70,7 +70,7 @@ def page_cluster_model_body():
     st.image(cluster_silhouette)
     st.info(
         "* Number of clusters chosen: 3\n"
-        "* Average Silhouette Score: 0.52 ≥ 0.45"
+        "* Average Silhouette Score: 0.51 ≥ 0.45"
     )
 
     cluster_distribution_per_variable(
@@ -102,7 +102,7 @@ def page_cluster_model_body():
     st.write("## Interpretation & Business Relevance")
     st.success(
         "**Performance Summary:**\n\n"
-        "- **Average Silhouette Score:** 0.52 ✅\n"
+        "- **Average Silhouette Score:** 0.51 ✅\n"
         "- The score meets the defined success criterion (≥ 0.45), "
         "indicating a satisfactory level of cluster separation and "
         "cohesion.\n"
