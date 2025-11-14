@@ -20,7 +20,7 @@ def predict_default_and_cluster(
     """
 
     st.write("---")
-    st.write("### Predicting Default Risk")
+    st.write("### Predicted Default Risk")
 
     # Default Prediction
     X_live_default = X_live[default_features]
@@ -36,7 +36,7 @@ def predict_default_and_cluster(
     )
 
     st.write("---")
-    st.write("### Predicting Cluster Membership")
+    st.write("### Predicted Cluster Membership")
 
     # Cluster Prediction
     X_live_cluster = X_live[cluster_features]

@@ -22,6 +22,8 @@ def page_project_hypothesis_body():
     This page helps link domain intuition with data-driven evidence.
     """
 
+    # Use cleaned dataset to ensure statistical tests and distributions
+    # reflect real patterns in the data
     df = load_default_data(clean=True, drop_duplicates=True)
     target_var = "loan_status"
 

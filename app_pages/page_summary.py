@@ -65,7 +65,6 @@ def page_summary_body():
         "or Interest Rate. The target variable, **`loan_status`**, "
         "indicates the loan repayment status (`0` = non-default, "
         "`1` = default).\n\n"
-        "In total, there are **32,581 records and 12 variables**."
     )
 
     # Business requirements section
@@ -77,7 +76,7 @@ def page_summary_body():
         "borrower and loan attributes most correlated with loan default. "
         "Provide visual and statistical insights to help business analysts "
         "understand the primary drivers of credit risk.\n"
-        "2. **Predictive Model (Machine Learning)**: Develop a machine "
+        "2. **Classification Model (Machine Learning)**: Develop a machine "
         "learning model capable of predicting whether a loan applicant is "
         "likely to default. The system should output a probability of "
         "default to support the credit team in decision-making.\n"
@@ -101,9 +100,9 @@ def page_summary_body():
         "Inspect data distributions and feature relationships.\n"
         "3. **Project Hypotheses & Validation** – Test key hypotheses about "
         "factors influencing default.\n"
-        "4. **Default Prediction Tool** – Answers **BR 2: Predictive Model** "
-        "and **BR 3: Clustering Model**. Input borrower info to get default "
-        "predictions and assigned clusters.\n"
+        "4. **Default Prediction Tool** – Answers **BR 2: Classification "
+        "Model** and **BR 3: Clustering Model**. Input borrower info to get "
+        "default predictions and assigned clusters.\n"
         "5. **ML Classification Model Insights** – Evaluate model metrics and "
         "feature importance.\n"
         "6. **ML Borrower Clustering Insights** – Evaluate model metrics and "

@@ -61,7 +61,7 @@ def page_loan_default_study_body():
     )
 
     # Optional data inspection
-    if st.checkbox("Inspect Loan Default Dataset"):
+    if st.checkbox("Inspect Loan Default Dataset (first 10 rows)"):
         st.write(
             f"The dataset has {df.shape[0]} rows and {df.shape[1]} columns."
             )
@@ -72,7 +72,7 @@ def page_loan_default_study_body():
     # Correlation Analysis section
     st.write("## Correlation Analysis")
     st.write(
-        "A correlation study was conducted using **Predictive Power Score "
+        "A correlation study was conducted using the **Predictive Power Score "
         "(PPS)**, which detects both linear and non-linear relationships. "
         "The PPS ranges from **0** (no predictive power) to **1** (perfect "
         "predictive power)."
@@ -83,12 +83,15 @@ def page_loan_default_study_body():
         heatmap_pps(df)
 
     # Show PPS table for key features
-    st.info("Strongest relationships with the target variable:")
+    st.info(
+        "The strongest relationships with the target variable can be detected "
+        "for these key features:"
+        )
     st.dataframe(get_important_features(df, target_var, PPS_Threshold))
 
     st.success(
-        "Correlations with the target are generally low, indicating default "
-        "behavior is influenced by multiple factors."
+        "In general, correlations with the target are low, indicating that "
+        "default behavior is influenced by multiple factors."
     )
     st.write("---")
 
@@ -109,7 +112,12 @@ def page_loan_default_study_body():
         "* Pay rent\n* Have higher interest rates\n"
         "* Higher loan amount relative to income\n\n"
         "Not all defaulting borrowers have all patterns simultaneously; these "
-        "factors influence default probability."
+        "factors influence default probability.\n\n"
+        "NOTE: Interest rates are strongly correlated with the loan grade. "
+        "From a business perspective, having a lower/worse loan grade "
+        "implies, that a borrower will have worse loan terms including higher "
+        "interest rates. Therefore, having a higher interest rate directly"
+        " implies that the borrower is more risky."
     )
 
     # Parallel plot
@@ -123,7 +131,7 @@ def page_loan_default_study_body():
         parallel_plot_default(df_eda)
         st.success(
             "The plot highlights interactions of key borrower and loan "
-            "attributes with default status."
+            "attributes with their default status."
         )
 
 
