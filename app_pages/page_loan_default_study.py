@@ -166,6 +166,7 @@ def heatmap_pps(df, threshold=PPS_Threshold, figsize=(18, 12), font_annot=14):
         sns.heatmap(
             pps_matrix,
             annot=True,
+            fmt=".3f",
             xticklabels=True,
             yticklabels=True,
             mask=mask,
@@ -189,6 +190,7 @@ def get_important_features(df, target_var, threshold=PPS_Threshold):
         .drop(target_var)
         .loc[lambda x: x.abs() > threshold]
         .sort_values(ascending=False)
+        .round(3)
         .to_frame(name="PPS Score")
     )
     pps_results.index.name = None
