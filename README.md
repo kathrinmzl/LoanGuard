@@ -8,7 +8,7 @@ Developed by [kathrinmzl](https://www.github.com/kathrinmzl)
 ![GitHub top language](https://img.shields.io/github/languages/top/kathrinmzl/LoanGuard?color=green)
 [![badge](https://img.shields.io/badge/deployment-Heroku-purple)](https://loan-guard-c4aee35f5523.herokuapp.com/)
 
-In the banking sector, effective credit risk assessment is critical for maintaining financial stability and minimizing losses. Loan defaults can lead to significant financial setbacks and reduced liquidity for lending institutions. The LoanGuard project aims to help financial institutions proactively identify borrowers who are likely to default and understand the key factors driving default risk.
+In the banking sector, effective credit risk assessment is critical for maintaining financial stability and minimizing losses. Loan defaults can lead to significant financial setbacks and reduced liquidity for lending institutions. The Loan Guard project aims to help financial institutions proactively identify borrowers who are likely to default and understand the key factors driving default risk.
 
 In addition, the project incorporates borrower segmentation through clustering, which groups borrowers with similar financial profiles and historical behavior. This combined approach allows lenders not only to predict default probabilities but also to tailor risk management strategies and business decisions based on the characteristics of different borrower segments.
 
@@ -42,7 +42,7 @@ In total, the dataset includes **32,581 records and 12 variables**. The target v
 <br><br>
 When I initially started working on this project, I used a different dataset from [Kaggle](https://www.kaggle.com/datasets/nikhil1e9/loan-default). After attempting to build meaningful prediction and clustering models, I decided to switch to a new dataset.
 <br><br>
-The previous dataset was highly synthetic, with all variables being uniformly distributed and showing very little correlation - both between features and with the target variable. Uniform distributions are particularly challenging for predictive modeling and clustering because they lack natural variability and concentration of values. Consequently, there are few meaningful patterns, groupings, or relationships for the models to learn from.
+The previous dataset was highly synthetic, with all variables being uniformly distributed and showing very little correlation, both between features and with the target variable. Uniform distributions are particularly challenging for predictive modeling and clustering because they lack natural variability and concentration of values. Consequently, there are few meaningful patterns, groupings, or relationships for the models to learn from.
 <br><br>
 As a result, it was very difficult to build a predictive model with good performance metrics and without overfitting. I experimented with several approaches to improve model performance and reduce overfitting, including hyperparameter tuning and binning numerical variables, but none led to satisfactory results. Furthermore, during the cluster analysis, the results did not correspond to any recognizable borrower groups or risk profiles, limiting the usefulness of the analysis.
 <br><br>
@@ -80,7 +80,7 @@ Provide visual and statistical insights to help business analysts understand the
 
 
 ## Hypotheses and how to validate them?
-To better understand the factors influencing loan default risk, I formulated four key hypotheses based on domain knowledge and the available data. Each hypothesis focuses on a variable expected to impact default probability.
+To better understand the factors influencing loan default risk,  four key hypotheses were formulated based on domain knowledge and the available data. Each hypothesis focuses on a variable expected to impact default probability.
 
 | Hypothesis | Rationale | Validation |
 |------------|------------|-------------|
@@ -158,7 +158,7 @@ This segmentation helps the credit and retention teams tailor communication, pro
 
 
 ## User Stories
-I developed user stories to clearly define the needs and goals of different stakeholders, ensuring that the project dashboard delivers actionable insights and functionality aligned with both business and technical objectives.
+User stories were developed to clearly define the needs and goals of different stakeholders, ensuring that the project dashboard delivers actionable insights and functionality aligned with both business and technical objectives.
 
 1. As a non-technical stakeholder, I want to view a concise and structured overview of the project, including its goals, dataset, and business requirements, so that I can understand what the project aims to achieve and how to navigate the dashboard.
 
@@ -435,7 +435,7 @@ If you wish to fork or clone this repository, please follow the instructions bel
 This project has been based on the methodologies used in the [Churnometer](https://github.com/Code-Institute-Solutions/churnometer) project 
 from Code Institute. Some functions from that project have been used in their 
 original form, while others have been customized for the purposes of this project. 
-The main functions that have been used:
+The main functions that have been used are:
 
 * Functions for calculating correlations and displaying correlation heatmaps.  
 * Customized function for testing different numerical transformations to evaluate 

@@ -119,7 +119,7 @@ def page_loan_default_study_body():
         "From a business perspective, having a lower/worse loan grade "
         "implies, that a borrower will have worse loan terms including higher "
         "interest rates. Therefore, having a higher interest rate directly"
-        " implies that the borrower is more risky."
+        " implies that the borrower is considered more risky."
     )
 
     # Parallel plot
