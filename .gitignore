@@ -15,5 +15,4 @@ catboost_info
 inputs/
 outputs/datasets/cleaned
 
-Notes.ipynb
 00_Notebook_Template.ipynb
