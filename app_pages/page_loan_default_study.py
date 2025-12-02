@@ -60,13 +60,6 @@ def page_loan_default_study_body():
         "from non-defaulted borrowers."
     )
 
-    # Optional data inspection
-    if st.checkbox("Inspect Loan Default Dataset (first 10 rows)"):
-        st.write(
-            f"The dataset has {df.shape[0]} rows and {df.shape[1]} columns."
-            )
-        st.write(df.head(10))
-
     st.write("---")
 
     # Correlation Analysis section

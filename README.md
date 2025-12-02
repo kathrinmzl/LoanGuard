@@ -189,13 +189,13 @@ It will serve two main user groups:
   - Project introduction  
   - Project terms & jargon
   - Dataset overview
+  - Checkbox: Data inspection (number of rows, columns, and first 10 rows)  
   - Business requirements  
   - Navigation guide for subsequent pages 
 
 ### **Page 2: Loan Default Study**
 - **Purpose:** Address **Business Requirement 1 (Data Insights)**. This page helps financial institutions understand what drives **default risk**. It focuses on identifying key borrower and loan attributes most correlated with default and provides **visual and statistical insights** for business analysts.
 - **Sections:**
-  - Checkbox: Data inspection (number of rows, columns, and first 10 rows)  
   - Correlation Analysis:
     - Checkbox: Display PPS Heatmap to detect both linear and non-linear relationships with the target variable
     - Table of most important features according to PPS score

@@ -7,6 +7,7 @@ users exploring the Loan Guard credit risk analysis app.
 """
 
 import streamlit as st
+from src.data_management import load_default_data
 
 
 def page_summary_body():
@@ -16,6 +17,9 @@ def page_summary_body():
     This page provides an overview of the project, dataset, business
     requirements, key terminology, and navigation instructions.
     """
+
+    # Load dataset
+    df = load_default_data()
 
     # Page title
     st.title("Loan Guard - Project Summary")
@@ -66,6 +70,13 @@ def page_summary_body():
         "indicates the loan repayment status (`0` = non-default, "
         "`1` = default).\n\n"
     )
+
+    # Optional data inspection
+    if st.checkbox("Inspect Loan Default Dataset (first 10 rows)"):
+        st.write(
+            f"The dataset has {df.shape[0]} rows and {df.shape[1]} columns."
+            )
+        st.write(df.head(10))
 
     # Business requirements section
     st.write("### Business Requirements")
