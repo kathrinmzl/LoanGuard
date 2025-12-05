@@ -59,16 +59,43 @@ def page_summary_body():
 
     # Dataset section
     st.write("### Dataset")
+
     st.info(
         "The used dataset is publicly available on "
         "[Kaggle](https://www.kaggle.com/datasets/laotse/"
         "credit-risk-dataset/data) and contains information about "
         "individual borrowers and their loans.\n\n"
+
         "Each row represents a loan record with personal and financial "
         "attributes, such as Age, Income, Employment Length, Loan Amount, "
         "or Interest Rate. The target variable, **`loan_status`**, "
         "indicates the loan repayment status (`0` = non-default, "
         "`1` = default).\n\n"
+
+        "The dataset consists of **12 variables**:\n"
+        "- **7 numerical variables** "
+        "(`person_age`, `person_income`, `person_emp_length`, "
+        "`loan_amnt`, `loan_int_rate`, `loan_percent_income`, "
+        "`cb_person_cred_hist_length`) stored as `int64` or `float64`.\n"
+        "- **4 categorical variables** "
+        "(`person_home_ownership`, `loan_intent`, `loan_grade`, "
+        "`cb_person_default_on_file`) stored as `object` type.\n"
+        "- **1 numerical target variable** `loan_status` (`int64`).\n\n"
+
+        "The dataset contains **a small number of missing values** in "
+        "**`person_emp_length`** and **`loan_int_rate`**, each affecting "
+        "fewer than 10% of all observations. These missing values have been "
+        "**imputed** during preprocessing.\n\n"
+
+        "Additionally, several **duplicate entries** were detected and have "
+        "been removed to ensure data quality.\n\n"
+
+        "Some variables exhibited **extreme outliers**, especially in "
+        "`person_income`, `person_age`, and `person_emp_length`. These were "
+        "addressed using **Winsorization with 5 folds**, trimming only the "
+        "most extreme values. Other numerical variables also contain "
+        "outliers, but they remain within realistic ranges and were therefore "
+        "kept to preserve potentially valuable information."
     )
 
     # Optional data inspection
