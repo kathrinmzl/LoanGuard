@@ -300,6 +300,7 @@ For the Jupyter notebooks, manual testing against user stories was deemed irrele
 | Feature | Action | Expected Result | Test Result |
 | --- | --- | --- | --- |
 | Project Summary Page | Navigate to summary page | Page is displayed with all sections visible; user can read overview, terms, dataset, and business requirements. | Pass |
+| Data Inspection | Tick checkbox to inspect dataset | Table shows number of rows, columns, and first 10 rows. | Pass |
 
 ---
 
@@ -309,7 +310,6 @@ For the Jupyter notebooks, manual testing against user stories was deemed irrele
 | Feature | Action | Expected Result | Test Result |
 | --- | --- | --- | --- |
 | Loan Default Study Page | Navigate to page | Page loads correctly; correlation and feature distributions sections are displayed. | Pass |
-| Data Inspection | Tick checkbox to inspect dataset | Table shows number of rows, columns, and first 10 rows. | Pass |
 | PPS Heatmap | Tick checkbox to show heatmap | PPS heatmap is displayed with relevant scores. | Pass |
 | Feature Distributions | Tick checkbox to show distributions | Visualizations for key features are displayed by default level. | Pass |
 | Parallel Plot | Tick checkbox to show parallel plot | Parallel plot displays interactions between features and default probability. | Pass |
